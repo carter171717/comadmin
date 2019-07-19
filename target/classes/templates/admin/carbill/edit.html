@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="utf-8">
+    <title>消费信息修改--后台管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all" />
+    <style type="text/css">
+        .layui-form-item .layui-inline{ width:33.333%; float:left; margin-right:0; }
+        @media(max-width:1240px){
+            .layui-form-item .layui-inline{ width:100%; float:none; }
+        }
+        .layui-form-item .role-box {
+            position: relative;
+        }
+        .layui-form-item .role-box .jq-role-inline {
+            height: 100%;
+            overflow: auto;
+        }
+
+    </style>
+</head>
+<body class="childrenBody">
+<form class="layui-form" style="width:80%;margin-top: 2em">
+    <input class="layui-hide" name="id" th:value="${localBill.id}"/>
+
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">消费名称</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input" name="billName" lay-verify="required" placeholder="请输入物品名称" th:value="${localBill.billName}">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">消费金额</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input" name="billNum" placeholder="请输入消费金额" th:value="${localBill.billNum}">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">消费日期</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input" id="billDay" name="billDay" autocomplete="off" placeholder="请选择消费日期" th:value="${localBill.billDay}">
+                <!--<input type="text" class="layui-input" name="billDay" placeholder="请输入消费日期" th:value="${localBill.billDay}">-->
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label">消费地点</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input" name="address"  placeholder="请输入消费地点" th:value="${localBill.address}">
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="layui-form-item">
+
+        <div class="layui-inline">
+            <div class="layui-form-item">
+                <label class="layui-form-label">消费类型</label>
+                <input th:type="hidden" th:value="${localBill.billType}" id ="bcBillType">
+                <div class="layui-input-block">
+                    <select name="billType" lay-filter="billType" id="billType" lay-search="" lay-verify="select"  th:value="${localBill.billType}">
+                        <option th:value="加油">加油</option>
+                        <option th:value="购物">购物</option>
+                        <option th:value="过路费">过路费</option>
+                        <option th:value="停车费">停车费</option>
+                        <option th:value="其他">其他</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">支付方式</label>
+            <input th:type="hidden" th:value="${localBill.payChannel}" id ="bcPayChannel">
+            <div class="layui-input-block">
+                <select name="payChannel" lay-filter="payChannel" id="payChannel" lay-search="" lay-verify="select" th:value="${localBill.payChannel}">
+
+                    <option th:value="现金">现金</option>
+
+                    <option th:value="微信">微信</option>
+
+                    <option th:value="支付宝">支付宝</option>
+
+                </select>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">备注</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input" name="remark" th:width="350px" placeholder="请输入备注信息..." th:value="${localBill.remark}">
+            </div>
+        </div>
+    </div>
+
+    <shiro:hasPermission name="sys:card:edit">
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit="" lay-filter="editCarbill">我要修改</button>
+            <button class="layui-btn layui-btn-primary" id="quitModify">我不改了</button>
+        </div>
+    </div>
+    </shiro:hasPermission>
+</form>
+<script type="text/javascript" th:src="@{/static/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/static/admin/js/carbill/carbillEdit.js}"></script>
+<script type="text/javascript" th:src="@{/static/jquery/jQuery-2.1.4.min.js}"></script>
+<script type="text/javascript">
+    var index = parent.layer.getFrameIndex(window.name); //当前窗口索引
+    $(document).ready(function() {
+        var payChannel = $("#bcPayChannel").val();
+        var billType = $("#bcBillType").val();
+        $("#payChannel").val(payChannel);
+        $("#billType").val(billType);
+        $("#quitModify").click(function() {
+            parent.layer.close(index);
+        });
+    });
+
+
+</script>
+</body>
+</html>

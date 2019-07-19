@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <property name="now" value="now()" dbms="mysql,h2"/>
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+    <property name="now" value="sysdate" dbms="oracle"/>
+
+    <changeSet id="20190705001" author="wangly">
+        <createTable tableName="car_bill" remarks="汽车消费信息表">
+            <column name="id" type="VARCHAR(32)" remarks="主键">
+                <constraints nullable="false" primaryKey="true" />
+            </column>
+            <column name="user_id" type="VARCHAR(32)" remarks="所属用户ID">
+                <constraints nullable="false" />
+            </column>
+            <column name="user_name" type="VARCHAR2(64)" remarks="所属用户名称">
+                <constraints nullable="true" />
+            </column>
+            <column name="bill_name" type="VARCHAR(64)" remarks="消费名称">
+                <constraints nullable="true" />
+            </column>
+            <column name="bill_num" type="VARCHAR(30)" remarks="消费金额">
+                <constraints nullable="true" />
+            </column>
+            <column name="bill_day" type="VARCHAR(30)" remarks="消费日期">
+                <constraints nullable="true" />
+            </column>
+            <column name="pay_channel" type="VARCHAR(30)" remarks="支付方式">
+                <constraints nullable="true" />
+            </column>
+            <column name="address" type="VARCHAR(32)" remarks="消费地点">
+                <constraints nullable="true" />
+            </column>
+            <column name="remark" type="VARCHAR(64)" remarks="备注">
+                <constraints nullable="true" />
+            </column>
+            <column name="create_time" type="timestamp" defaultValueDate="${now}" remarks="创建时间">
+                <constraints nullable="true" />
+            </column>
+            <column name="update_time" type="timestamp" defaultValueDate="${now}" remarks="更新时间">
+                <constraints nullable="true" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20190705002" author="wangly">
+        <addColumn tableName="car_bill">
+            <column name="bill_type" type="VARCHAR(20)"  remarks="账单类型">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+
+</databaseChangeLog>

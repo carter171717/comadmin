@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaoshu.admin.mapper.CarBillMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xiaoshu.admin.entity.CarBill">
+        <id column="id" property="id" />
+        <result column="user_id" property="userId" />
+        <result column="user_name" property="userName" />
+        <result column="bill_name" property="billName" />
+        <result column="bill_num" property="billNum" />
+        <result column="bill_day" property="billDay" />
+        <result column="pay_channel" property="payChannel" />
+        <result column="address" property="address" />
+        <result column="remark" property="remark" />
+        <result column="bill_type" property="billType" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_id, user_name, bill_name, bill_num, bill_day, pay_channel, address, remark,bill_type, create_time, update_time
+    </sql>
+
+    <select id="getTotalBill" resultType="string" >
+
+      select ROUND(sum(bill_num),2) as "total" from car_bill
+        where user_id =  #{userId}
+
+    </select>
+
+    <select id="getTotalOilBill" resultType="string" >
+
+      select ROUND(sum(bill_num),2) as "total" from car_bill
+        where user_id =  #{userId}
+        and bill_type = '加油'
+
+    </select>
+
+    <select id="getCountOilByMonth" resultType="map" >
+
+      select ROUND(sum(bill_num),2) as "total" ,left(bill_day,7) as "month"
+      from car_bill where user_id = #{userId} and bill_type = '加油'
+      group by left(bill_day,7)
+      order by left(bill_day,7) asc
+
+    </select>
+
+    <select id="getCountStopByMonth" resultType="map" >
+
+      select ROUND(sum(bill_num),2) as "total" ,left(bill_day,7) as "month"
+      from car_bill where user_id = #{userId} and bill_type = '停车费'
+      group by left(bill_day,7)
+      order by left(bill_day,7) asc
+
+    </select>
+
+
+    <select id="getCountAllByMonth" resultType="map" >
+
+      select ROUND(sum(bill_num),2) as "total" ,left(bill_day,7) as "month"
+      from car_bill where user_id = #{userId}
+      group by left(bill_day,7)
+      order by left(bill_day,7) asc
+
+    </select>
+
+    <select id="getCountOnRodeByMonth" resultType="map" >
+
+      select ROUND(sum(bill_num),2) as "total",left(bill_day,7) as "month" from car_bill
+      where user_id = #{userId}
+      and (bill_type = '加油' or bill_type = '过路费')
+      group by left(bill_day,7)
+
+    </select>
+
+
+
+    <select id="getCountByType" resultType="map" >
+
+    select ROUND(sum(bill_num),2) as "total" ,bill_type as "billType" from car_bill
+    where user_id =  #{userId}
+    group by bill_type
+
+    </select>
+
+
+
+</mapper>

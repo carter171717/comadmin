@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="utf-8">
+    <title>我的博客首页</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all"/>
+    <link rel="stylesheet" th:href="@{/static/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/static/front/css/index.css}"/>
+    <style>
+        .arcimg {
+            width: 150px;
+            height: 150px;
+            float: left;
+            overflow: hidden;
+        }
+        .srcheadimg {
+            width: 35px;
+            height: 35px;
+        }
+    </style>
+</head>
+<body>
+<!-- 技术日记 -->
+<div class="container div_divider">
+    <!-- 分割线 -->
+    <hr class="hr_1">
+    <span style="font-size: large">欢迎来到库里小朋友的博客世界</span>
+    <hr class="hr_2">
+    <div class="row">
+        <!-- 文章列表 -->
+        <div class="col-xs-9">
+            <div class="list-group div_article">
+                <!-- 子头栏 -->
+                <a href="#" class="list-group-item active acitem_article_first">
+                    <h4 class="list-group-item-heading ">
+                        My Life, Like Sun!
+                    </h4>
+                </a>
+                <!-- 文章列表 -->
+                <div class="list-group-item item_article" th:each="blog:${blogList}">
+                    <div class="row">
+                        <div class="div_center col-xs-9">
+                            <div class="list-group-item-heading div_article_title">
+                                <strong>
+                                    <a th:href="${'/web/article/'+blog.id+'.html'}" >
+                                        <span th:text="${blog.title}" ></span></a>
+                                </strong>
+                            </div>
+                            <p class="list-group-item-text div_article_content">
+                                    <span th:text="${blog.summary}"></span>
+                            </p>
+                        </div>
+                        <!-- 右侧图片，信息 -->
+                        <div class="col-xs-3 div_right_info">
+                            <img class="iv_article img-rounded arcimg" src="/static/front/images/ava.png">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右侧 -->
+        <div class="col-xs-3 div_record">
+            <!-- 用户信息 -->
+            <div class="jumbotron " style="background: #FFCC66">
+                <img class="img-circle srcheadimg" src="/static/front/images/ava.png">
+                <div style="display: inline-block; margin-left: 12px;font-size: 18px;">库里小朋友</div>
+            </div>
+            <!-- 随手记录 -->
+            <div style="display: flex;">
+                <div style="flex: 1">
+                    <hr>
+                </div>
+                <div style="text-align: center;line-height: 48px;color: #34374C">记录美好的心情</div>
+                <div style="flex: 1">
+                    <hr>
+                </div>
+            </div>
+            <input type="text" class="form-control" placeholder="标题:美好的一天...">
+            <br>
+            <textarea class="form-control" rows="3" name=textarea placeholder="内容:今天捡到一分钱！！！^_^"></textarea>
+            <br>
+            <div class="div_save">
+                <button type="button" class="btn btn-primary btn_save_record">save</button>
+            </div>
+            <hr>
+            <!-- 小功能列表 -->
+            <div class="row div_little_func">
+                <div class="col-xs-4">
+                    <button class="btn btn-default btn-cricle btn_login" data-toggle="modal" data-target="#loginModal">
+                        登
+                    </button>
+                </div>
+                <div class="col-xs-4">
+                    <button class="btn btn-default btn-cricle btn_stay">留</button>
+                </div>
+                <div class="col-xs-4">
+                    <button class="btn btn-default btn-cricle btn_write">写</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script th:src="@{/static/front/js/jquery.min.js}"></script>
+<script th:src="@{/static/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>

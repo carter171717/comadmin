@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="utf-8">
+    <title>首页--凌云Admin后台管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all" />
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_tnyc012u2rlwstt9.css" media="all" />
+    <link rel="stylesheet" th:href="@{/static/admin/css/main.css}" media="all" />
+    <style>
+        .grid-demo-bg1{
+            background-color: #1E9FFF;
+            height: 260px;
+        }
+        .grid-demo-bg2{
+            background-color:#e47214;
+            height: 260px;
+        }
+
+        .grid-demo-bg3{
+            background-color: #DF5353;
+            height: 45px;
+        }
+        .grid-demo-bg4{
+            background-color:#1E9FFF;
+            height: 45px;
+        }
+    </style>
+</head>
+<body class="childrenBody">
+<!--<div class="panel_box row"  style="text-align: center;margin-top: 10em;">
+    <h1>欢迎<shiro:principal property = "nickName"/>使用后台管理！</h1>
+</div>-->
+
+<div class="layui-row layui-col-space10" style="margin-top: 1em;margin-left:1em;width: 95%">
+    <div class="layui-col-md5">
+        <div class="layui-row grid-demo layui-col-space1">
+
+            <div class="layui-col-md5">
+                <div class="grid-demo">
+                    <button type="button" class="layui-btn layui-btn-warm " style="width: 100%" id="newDate">2019年7月9日</button>
+                </div>
+            </div>
+            <div class="layui-col-md7">
+                <div class="grid-demo">
+                    <button type="button" class="layui-btn layui-btn-normal" style="width: 100%" id="lunarDate">己亥年六月初七</button>
+                </div>
+            </div>
+            <div class="layui-col-md5">
+                <div class="grid-demo">
+                    <button type="button" class="layui-btn layui-btn-warm " style="width: 100%" >本月生日的成员</button>
+                </div>
+            </div>
+            <div class="layui-col-md7">
+                <div class="grid-demo">
+                    <button type="button" class="layui-btn layui-btn-normal" style="width: 100%" id="birthdayMembers">王海赟，王淑霞，王凌云</button>
+                </div>
+            </div>
+            <div class="layui-col-md5">
+                <div class="grid-demo">
+                    <button type="button" class="layui-btn layui-btn-warm " style="width: 100%" >信用卡应还总额</button>
+                </div>
+            </div>
+            <div class="layui-col-md7">
+                <div class="grid-demo">
+                    <button type="button" class="layui-btn layui-btn-normal" style="width: 100%" id="creditBill">11330.38元</button>
+                </div>
+            </div>
+            <div class="layui-col-md5">
+                <div class="grid-demo">
+                    <button type="button" class="layui-btn layui-btn-warm " style="width: 100%">顺风车总收入</button>
+                </div>
+            </div>
+            <div class="layui-col-md7">
+                <div class="grid-demo">
+                    <button type="button" class="layui-btn layui-btn-normal" style="width: 100%" id="incomeTotal">2000元</button>
+                </div>
+            </div>
+
+            <div class="layui-col-md5">
+                <div class="grid-demo">
+                    <button type="button" class="layui-btn layui-btn-warm " style="width: 100%">用车总支出</button>
+                </div>
+            </div>
+            <div class="layui-col-md7">
+                <div class="grid-demo">
+                    <button type="button" class="layui-btn layui-btn-normal" style="width: 100%" id="billTotal">6000元</button>
+                </div>
+            </div>
+
+            <div class="layui-col-md5">
+                <div class="grid-demo">
+                    <button type="button" class="layui-btn layui-btn-warm " style="width: 100%">加油总金额</button>
+                </div>
+            </div>
+            <div class="layui-col-md7">
+                <input type="hidden" id="oilMoney">
+                <div class="grid-demo">
+                    <button type="button" class="layui-btn layui-btn-normal" style="width: 100%" id="oilTotal">3000元</button>
+                </div>
+            </div>
+
+             <div class="layui-col-md2">
+                <div class="grid-demo">
+                    <button type="button" class="layui-btn layui-btn" style="width: 100%">NOW</button>
+                </div>
+            </div>
+            <div class="layui-col-md2">
+                <div class="grid-demo">
+                    <input type="number"  width="100%" class="layui-input" id="drived" lay-verify="required" placeholder="km">
+                </div>
+            </div>
+            <div class="layui-col-md2">
+                <div class="grid-demo">
+                    <button type="button" class="layui-btn layui-btn " style="width: 100%">LEFT</button>
+                </div>
+            </div>
+            <div class="layui-col-md2">
+                <div class="grid-demo">
+                    <input type="number" width="100%" class="layui-input" id="candrive" lay-verify="required" placeholder="km">
+                </div>
+            </div>
+            <div class="layui-col-md2">
+                <div class="grid-demo">
+                    <button type="button" class="layui-btn layui-btn" style="width: 100%" id="calc" onclick="calc()">计算油耗</button>
+                </div>
+            </div>
+            <div class="layui-col-md2">
+
+                <div class="grid-demo">
+                    <button type="button" class="layui-btn layui-btn-danger " style="width: 100%" id="yh"></button>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="layui-col-md7">
+        <div class="grid-demo-bg2">
+
+            <div id="container2" style="min-width:100%;height:100%"></div>
+        </div>
+    </div>
+</div>
+
+<div class="layui-row layui-col-space10" style="margin-left:1em;width: 95%">
+    <div class="layui-col-md5">
+        <div class="grid-demo-bg1">
+
+            <div id="container1" style="min-width:100%;height:100%"></div>
+
+        </div>
+    </div>
+    <div class="layui-col-md7">
+        <div class="grid-demo-bg2">
+
+            <div id="container3" style="min-width:100%;height:100%"></div>
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript" th:src="@{/static/highcharts/highcharts.js}"></script>
+<script type="text/javascript" th:src="@{/static/highcharts/highcharts-3d.js}"></script>
+<script type="text/javascript" th:src="@{/static/highcharts/modules/cylinder.js}"></script>
+<script type="text/javascript" th:src="@{/static/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/static/admin/js/main.js}"></script>
+<script type="text/javascript" th:src="@{/static/jquery/jQuery-2.1.4.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/admin/js/main_data.js}"></script>
+</body>
+</html>

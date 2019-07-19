@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaoshu.admin.mapper.CreditCardMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xiaoshu.admin.entity.CreditCard">
+        <id column="id" property="id" />
+        <result column="user_id" property="userId" />
+        <result column="user_name" property="userName" />
+        <result column="bank_name" property="bankName" />
+        <result column="card_num" property="cardNum" />
+        <result column="card_owner" property="cardOwner" />
+        <result column="validity" property="validity" />
+        <result column="bill_date" property="billDate" />
+        <result column="pay_date" property="payDate" />
+        <result column="current_bill" property="currentBill" />
+        <result column="status" property="status" />
+        <result column="remark" property="remark" />
+        <result column="card_quota" property="cardQuota" />
+        <result column="uncount_bill" property="uncountBill" />
+        <result column="left_quota" property="leftQuota" />
+        <result column="sort" property="sort" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_id, user_name, bank_name, card_num, card_owner, left_quota,uncount_bill,sort,validity, bill_date, pay_date, current_bill, status, remark,card_quota, create_time, update_time
+    </sql>
+
+    <select id="getTotalCreditMoney" resultType="string" >
+       select ROUND(sum(current_bill),2) as num from credit_card
+       where user_id = #{userId}
+    </select>
+
+</mapper>

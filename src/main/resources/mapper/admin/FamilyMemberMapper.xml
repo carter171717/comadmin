@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaoshu.admin.mapper.FamilyMemberMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xiaoshu.admin.entity.FamilyMember">
+        <id column="id" property="id" />
+        <result column="user_id" property="userId" />
+        <result column="user_name" property="userName" />
+        <result column="name" property="name" />
+        <result column="sex" property="sex" />
+        <result column="animal" property="animal" />
+        <result column="birth_day_new" property="birthDayNew" />
+        <result column="birth_day_lunar" property="birthDayLunar" />
+        <result column="relation" property="relation" />
+        <result column="is_manager" property="isManager" />
+        <result column="manager_id" property="managerId" />
+        <result column="status" property="status" />
+        <result column="remark" property="remark" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_id, user_name, name, sex, animal, birth_day_new, birth_day_lunar, relation, is_manager, manager_id, status, remark, create_time, update_time
+    </sql>
+
+    <select id="getSexScale" resultType="map" >
+          select count(1) as "num", sex as "sex" from family_member
+          where user_id = #{userId}
+          group by sex
+    </select>
+
+    <select id="getBirthInCurrentMonth" resultType="map" >
+         select name as "name" ,birth_day_new as "birthDayNew", birth_day_lunar as "birthDayLunar" from family_member
+         where user_id = #{userId}
+         and birth_day_lunar like '${month}%'
+    </select>
+
+    <select id="getCountByLunar" resultType="map" >
+        select count(1) as "num",left(birth_day_lunar,2) as "month" from family_member
+        where user_id = #{userId}
+        group by left(birth_day_lunar,2)
+    </select>
+
+    <select id="getCountByAnimal" resultType="map" >
+       select count(1) as "num",animal as "animal" from family_member
+       where user_id = #{userId}
+       group by animal
+    </select>
+
+</mapper>

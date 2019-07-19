@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="utf-8">
+    <title>卡片添加--后台管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all" />
+    <style type="text/css">
+        .layui-form-item .layui-inline{ width:33.333%; float:left; margin-right:0; }
+        @media(max-width:1240px){
+            .layui-form-item .layui-inline{ width:100%; float:none; }
+        }
+        .layui-form-item .role-box {
+            position: relative;
+        }
+        .layui-form-item .role-box .jq-role-inline {
+            height: 100%;
+            overflow: auto;
+        }
+
+    </style>
+</head>
+<body class="childrenBody">
+<form class="layui-form" style="width:80%;margin-top: 2%;">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">持卡人</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input" name="cardOwner" lay-verify="required" placeholder="请输入持卡人姓名">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">银行名称</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input" name="bankName" placeholder="请输入银行名称">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">银行卡号</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input" name="cardNum" lay-verify="required" placeholder="请输入银行卡号">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">额度</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input" name="cardQuota" placeholder="请输入卡额度">
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+
+        <div class="layui-inline">
+            <label class="layui-form-label">账单日期</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input" name="billDate"  placeholder="请输入账单日期">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">还款日期</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input" name="payDate"  placeholder="请输入还款日期">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">本月待还</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input" name="currentBill" lay-verify="required" placeholder="请输入本月待还金额">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">未出账单</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input" name="uncountBill" placeholder="请输入未出账单金额">
+            </div>
+        </div>
+
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">剩余额度</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input" name="leftQuota" lay-verify="required" placeholder="请输入剩余额度">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">有效日期</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input" name="validity" placeholder="请输入有效日期">
+            </div>
+        </div>
+
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">排序序号</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input" name="sort" placeholder="请输入排序序号">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">备注</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input" name="remark" th:width="350px" placeholder="请输入备注信息...">
+            </div>
+        </div>
+    </div>
+
+
+
+    <shiro:hasPermission name="sys:card:add">
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit="" lay-filter="addCard">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+    </shiro:hasPermission>
+</form>
+<script type="text/javascript" th:src="@{/static/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/static/admin/js/creditcard/cardAdd.js}"></script>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="utf-8">
+    <title>创建博客--后台管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all" />
+    <link rel="stylesheet" th:href="@{/static/jquery-layout/jquery.layout-latest.css}" />
+    <link rel="stylesheet" th:href="@{/static/summernote/summernote.css}" />
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/font-awesome.min.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/style.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/animate.css}"/>
+    <link rel="stylesheet" th:href="@{/static/select/select2.css}"/>
+    <link rel="stylesheet" th:href="@{/static/bootstrap-tags-input/bootstrap-tagsinput.css}"/>
+
+    <style type="text/css">
+        .layui-form-item .layui-inline{ width:33.333%; float:left; margin-right:0; }
+        @media(max-width:1240px){
+            .layui-form-item .layui-inline{ width:100%; float:none; }
+        }
+        .layui-form-item .role-box {
+            position: relative;
+        }
+        .layui-form-item .role-box .jq-role-inline {
+            height: 100%;
+            overflow: auto;
+        }
+
+        .grid-demo-bg1{
+
+            height: 480px;
+            margin-left: 1em;
+        }
+        .grid-demo-bg2{
+            background-color:#e47214;
+            height: 480px;
+        }
+
+        .grid-demo-bg3{
+            background-color: #DF5353;
+            height: 45px;
+        }
+        .grid-demo-bg4{
+            background-color:#1E9FFF;
+            height: 45px;
+        }
+
+    </style>
+</head>
+<body class="childrenBody">
+<form class="layui-form" id="blogAddForm" style="width:98%;">
+
+
+    <div class="layui-row layui-col-space10">
+        <div class="layui-col-md9">
+            <div class="grid-demo-bg1">
+                <div class="grid-demo" style="height:100%;">
+
+                    <div class="form-group">
+                        <div id="content" name="content" class="summernote" style="height: 100%;width: 100%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md3">
+            <div class="grid-demo-bg1">
+
+
+                <div class="form-group">
+                    <label class=" control-label">标题:</label>
+                    <div class="">
+                        <input type="text" class="form-control" name="title" placeholder="在这里输入标题">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class=" control-label">摘要:</label>
+                    <div class="">
+                        <input type="text" class="form-control" name="summary" placeholder="在这里输入摘要">
+                        <span class="help-block m-b-none">
+                        <i class="fa fa-info-circle"></i> 留空则默认为博文前150字节为博文的摘要
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class=" control-label">作者:</label>
+                    <div class="">
+                        <input type="text" class="form-control" name="createBy" placeholder="请输入作者">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class=" control-label">备注:</label>
+                    <div class="">
+                        <!--<input type="text"  class="form-control" name="remark" placeholder="请输入备注">-->
+                        <textarea name="remark" id="remark" class="form-control"  rows="2" placeholder="请输入备注"> </textarea>
+                    </div>
+                </div>
+                <div class="mail-body text-right tooltip-demo">
+                    <button type="button" class="btn btn-sm btn-primary" lay-submit="" lay-filter="addBlog"><i
+                            class="fa fa-check"></i>保 存
+                    </button>&nbsp;
+                    <button type="button" class="btn btn-sm btn-danger" onclick="editOrPreview(this)"><i
+                            class="fa fa-reply-all"></i>预 览
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+<script type="text/javascript" th:src="@{/static/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/static/admin/js/blog/blogAdd.js}"></script>
+<script type="text/javascript" th:src="@{/static/admin/js/jquery.min.js}"></script>
+<script th:src="@{/static/admin/js/bootstrap.min.js}"></script>
+<script th:src="@{/static/summernote/summernote.min.js}"></script>
+<script th:src="@{/static/summernote/summernote-zh-CN.js}"></script>
+<script th:src="@{/static/summernote/summernote-ext-highlignt.js}"></script>
+<script th:src="@{/static/summernote/summernote-add-class.js}"></script>
+<script th:src="@{/static/summernote/mySummernote.js}"></script>
+<!-- jquery-validate 表单验证插件 -->
+<script th:src="@{/static/validate/jquery.validate.min.js}"></script>
+<script th:src="@{/static/validate/additional-methods.min.js}"></script>
+<script th:src="@{/static/validate/common2.js}"></script>
+<script th:src="@{/static/validate/messages_zh.min.js}"></script>
+<script th:src="@{/static/validate/jquery.validate.extend.js}"></script>
+<script th:src="@{/static/bootstrap-tags-input/bootstrap-tagsinput.min.js}"></script>
+<script th:src="@{/static/jquery-layout/jquery.layout-latest.js}"></script>
+
+<script>
+    $(document).ready(function() {
+        //jquery创建一个summernote实例
+        var height = $(window).height() ;
+        var width = $(window).width() /1.3;
+        $('#content').summernote({
+            //功能图标改为中文
+            lang: 'zh-CN',
+            //预设内容
+            placeholder: '请在此输入博客内容...',
+            height: 430,
+            width:970,
+            addclass: {
+                debug: false,
+                classTags: [{
+                    title: "Button",
+                    "value": "btn btn-success"
+                }, "jumbotron", "lead", "img-rounded", "img-circle",
+                    "img-responsive", "btn", "btn btn-success", "btn btn-danger",
+                    "text-muted", "text-primary", "text-warning", "text-danger",
+                    "text-success", "table-bordered", "table-responsive", "alert",
+                    "alert alert-success", "alert alert-info", "alert alert-warning",
+                    "alert alert-danger", "visible-sm", "hidden-xs", "hidden-md",
+                    "hidden-lg", "hidden-print"]
+            },
+            toolbar: [
+                ['style', ['style', 'addclass', 'clear']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['highlight', ['highlight']],
+                ['fontname', ['fontname']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video']],
+                ['view', ['fullscreen', 'codeview', 'help']]
+            ],
+            //回调函数
+            callbacks: {
+                //初始化
+                onInit: function() {
+                    //init
+                },
+                //焦点
+                onFocus: function() {
+                    //focus
+                },
+                //图片文件上传
+                onImageUpload: function(files, editor, $editable) {
+                    data = new FormData();
+                    data.append("file", files[0]);
+                    $.ajax({
+                        data : data,
+                        type : "POST",
+                        url : "",
+                        cache : false,
+                        contentType : false,
+                        processData : false,
+                        dataType : "json",
+                        success: function(data) {
+                            //[服务器所在文件所在目录位置]一般为"http://119.23.216.181/RoboBlogs/Upload_File/default_show.png"
+                            $('#content').summernote('insertImage', "[服务器所在文件所在目录位置]");
+                        },
+                        error:function(){
+                            alert("上传失败");
+                        }
+                    });
+                }
+            }
+
+        });
+        $("button#btn1").click(function(){
+            var tt=$("#summernote").summernote("code");
+           // $("div#html").html(tt);
+            alert(tt);
+        });
+
+    });
+</script>
+</body>
+</html>

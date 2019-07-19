@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <property name="now" value="now()" dbms="mysql,h2"/>
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+    <property name="now" value="sysdate" dbms="oracle"/>
+
+    <changeSet id="20190704021" author="wangly">
+        <createTable tableName="credit_card" remarks="信用卡信息表">
+            <column name="id" type="VARCHAR(32)" remarks="主键">
+                <constraints nullable="false" primaryKey="true" />
+            </column>
+            <column name="user_id" type="VARCHAR(32)" remarks="所属用户ID">
+                <constraints nullable="false" />
+            </column>
+            <column name="user_name" type="VARCHAR2(64)" remarks="所属用户名称">
+                <constraints nullable="true" />
+            </column>
+            <column name="bank_name" type="VARCHAR(64)" remarks="银行名称">
+                <constraints nullable="true" />
+            </column>
+            <column name="card_num" type="VARCHAR(30)" remarks="银行卡号">
+                <constraints nullable="true" />
+            </column>
+            <column name="card_owner" type="VARCHAR(30)" remarks="持卡人姓名">
+                <constraints nullable="true" />
+            </column>
+            <column name="validity" type="VARCHAR(32)" remarks="有效期">
+                <constraints nullable="true" />
+            </column>
+            <column name="bill_date" type="VARCHAR(64)" remarks="账单日">
+                <constraints nullable="true" />
+            </column>
+            <column name="pay_date" type="VARCHAR(64)" remarks="还款日">
+                <constraints nullable="true" />
+            </column>
+            <column name="current_bill" type="VARCHAR(32)" remarks="本月账单金额">
+                <constraints nullable="true" />
+            </column>
+            <column name="status" type="VARCHAR(2)" remarks="状态">
+                <constraints nullable="true" />
+            </column>
+            <column name="remark" type="VARCHAR(255)" remarks="备注">
+                <constraints nullable="true" />
+            </column>
+            <column name="create_time" type="timestamp" defaultValueDate="${now}" remarks="创建时间">
+                <constraints nullable="true" />
+            </column>
+            <column name="update_time" type="timestamp" defaultValueDate="${now}" remarks="更新时间">
+                <constraints nullable="true" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20190705001" author="wangly">
+        <addColumn tableName="credit_card">
+            <column name="card_quota" type="VARCHAR(10)"  remarks="信用卡额度">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="20190718001" author="wangly">
+        <addColumn tableName="credit_card">
+            <column name="uncount_bill" type="VARCHAR(16)"  remarks="未出账单">
+                <constraints nullable="true"/>
+            </column>
+            <column name="left_quota" type="VARCHAR(16)"  remarks="剩余额度">
+                <constraints nullable="true"/>
+            </column>
+            <column name="sort" type="VARCHAR(2)"  remarks="排序序号">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+</databaseChangeLog>

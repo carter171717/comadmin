@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog 
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+	<preConditions>
+		<!-- 次数不配置,程序将自动识别数据库类型
+		<dbms type="mysql" />
+		 -->
+	</preConditions>
+
+	<!-- schema -->
+	<include file="classpath:liquibase/schema/init/changelog.xml" relativeToChangelogFile="false" />
+
+	<!-- data
+	<include file="classpath:db/livedata/changelog.xml" relativeToChangelogFile="false" />
+	-->
+</databaseChangeLog>

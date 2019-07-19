@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaoshu.admin.mapper.CarIncomeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xiaoshu.admin.entity.CarIncome">
+        <id column="id" property="id" />
+        <result column="user_id" property="userId" />
+        <result column="user_name" property="userName" />
+        <result column="passenger_name" property="passengerName" />
+        <result column="sex" property="sex" />
+        <result column="phone" property="phone" />
+        <result column="wx_id" property="wxId" />
+        <result column="ride_day" property="rideDay" />
+        <result column="start_location" property="startLocation" />
+        <result column="end_location" property="endLocation" />
+        <result column="fee" property="fee" />
+        <result column="ride_line" property="rideLine" />
+        <result column="remark" property="remark" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_id, user_name, passenger_name, sex, phone, wx_id, ride_day, start_location, end_location, fee,ride_line, remark, create_time, update_time
+    </sql>
+
+    <select id="getIncomeTotal" resultType="string" >
+
+        select sum(fee) as "total" from car_income
+        where user_id =  #{userId}
+
+    </select>
+
+    <select id="getCountByMonth" resultType="map" >
+
+       select ifnull(t1.total,0) as total ,t2.billMonth as "month" from (
+        select sum(fee) as "total",left(ride_day,7) as "month" from car_income
+         where user_id = #{userId}
+         group by left(ride_day,7) order by left(ride_day,7) asc
+        ) t1 right join (
+        select distinct(left(bill_day,7)) as billMonth from car_bill
+        where user_id = #{userId}
+        order by billMonth asc
+        ) t2 on t1.month =t2.billMonth order by t2.billMonth asc
+
+    </select>
+
+
+
+</mapper>
