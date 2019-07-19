@@ -19,6 +19,7 @@ public class UploadServiceImpl implements UploadService {
 
     @Override
     public String upload(MultipartFile file) throws IOException, NoSuchAlgorithmException {
+        System.out.println("开始上传图片了");
         byte[] data = file.getBytes();
         Rescource rescource = new Rescource();
         QueryWrapper<Rescource> wrapper = new QueryWrapper<>();

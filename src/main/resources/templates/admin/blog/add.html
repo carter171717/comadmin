@@ -173,27 +173,34 @@
             callbacks: {
                 //初始化
                 onInit: function() {
+
                     //init
                 },
                 //焦点
                 onFocus: function() {
                     //focus
+
                 },
-                //图片文件上传
+
+               //图片文件上传
                 onImageUpload: function(files, editor, $editable) {
+                    alert("开始上传文件");
                     data = new FormData();
                     data.append("file", files[0]);
                     $.ajax({
                         data : data,
+                        field: 'picture',
                         type : "POST",
-                        url : "",
+                        url : "/upload/uploadPic",
                         cache : false,
                         contentType : false,
                         processData : false,
                         dataType : "json",
                         success: function(data) {
+                            var url = data.url;
+                            alert(url);
                             //[服务器所在文件所在目录位置]一般为"http://119.23.216.181/RoboBlogs/Upload_File/default_show.png"
-                            $('#content').summernote('insertImage', "[服务器所在文件所在目录位置]");
+                            $('#content').summernote('insertImage', url);
                         },
                         error:function(){
                             alert("上传失败");
@@ -203,13 +210,12 @@
             }
 
         });
-        $("button#btn1").click(function(){
-            var tt=$("#summernote").summernote("code");
-           // $("div#html").html(tt);
-            alert(tt);
-        });
 
     });
+
+    function test() {
+        alert("11");
+    }
 </script>
 </body>
 </html>

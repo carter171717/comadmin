@@ -88,21 +88,19 @@ function sendFile($summernote, file) {
     var formData = new FormData();
     formData.append("file", file);
     $.ajax({
-        url: "/qiniu/image/upload",
+        url: "/upload/uploadPic",
         data: formData,
         cache: false,
         contentType: false,
         processData: false,
         type: 'POST',
         success: function (result) {
-            console.log(result)
-            if (result.code == web_status.SUCCESS) {
-                $summernote.summernote('insertImage', result.data, function ($image) {
-                    $image.attr('src', result.data);
-                });
-            } else {
-                $.modal.alertError(result.msg);
-            }
+            console.log(result.data.name);
+
+            $summernote.summernote('insertImage', result.data.url, function ($image) {
+                    $image.attr('src', result.data.url);
+            });
+
         }
     });
 }
