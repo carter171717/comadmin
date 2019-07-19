@@ -95,6 +95,16 @@
                         <input type="text" class="form-control" name="createBy" placeholder="请输入作者">
                     </div>
                 </div>
+
+                <div class="form-group">
+                    <label class=" control-label">类别:</label>
+                    <div class="">
+                        <select name="category" lay-filter="category" id="category" lay-search="" lay-verify="select">
+                            <option th:value="IT技术">IT技术</option>
+                            <option th:value="个人日记">个人日记</option>
+                        </select>
+                    </div>
+                </div>
                 <div class="form-group">
                     <label class=" control-label">备注:</label>
                     <div class="">

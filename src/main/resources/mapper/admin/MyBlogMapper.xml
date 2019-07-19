@@ -8,6 +8,7 @@
         <result column="user_id" property="userId" />
         <result column="user_name" property="userName" />
         <result column="category_id" property="categoryId" />
+        <result column="category" property="category" />
         <result column="title" property="title" />
         <result column="summary" property="summary" />
         <result column="header_img" property="headerImg" />
@@ -22,7 +23,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, user_id, user_name, category_id, title, summary, header_img, status, content, create_by, create_day,remark, create_time, update_time
+        id, user_id, user_name, category_id, title, summary, category,header_img, status, content, create_by, create_day,remark, create_time, update_time
     </sql>
 
 </mapper>

@@ -60,5 +60,13 @@
         </addColumn>
     </changeSet>
 
+    <changeSet id="20190719002" author="wangly">
+        <addColumn tableName="my_blog">
+            <column name="category" type="VARCHAR(50)"  remarks="类别：技术、日记">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
 
 </databaseChangeLog>

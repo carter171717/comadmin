@@ -43,6 +43,12 @@ public class MyBlog extends Model<MyBlog> {
     private String categoryId;
 
     /**
+     * 类别名称
+     */
+    @TableField("category")
+    private String category;
+
+    /**
      * 标题
      */
     private String title;
@@ -90,13 +96,19 @@ public class MyBlog extends Model<MyBlog> {
      */
     @TableField("create_time")
     private LocalDateTime createTime;
-
     /**
      * 更新时间
      */
     @TableField("update_time")
     private LocalDateTime updateTime;
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
     public String getCreateDay() {
         return createDay;
     }

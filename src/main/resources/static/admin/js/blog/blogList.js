@@ -20,12 +20,13 @@ layui.use(['layer','form','table'], function() {
         width: $(parent.window).width()-223,
         cols: [[
             {type:'checkbox'},
-            {field:'title', title: '博客标题', width:'25%'},
+            {field:'title', title: '博客标题', width:'20%'},
             {field:'summary',  title: '摘要',    width:'15%'},
             {field:'createBy',     title: '作者',    width:'8%' },
+            {field:'category',     title: '类别',    width:'8%' },
             {field:'createDay',     title: '创建日期',    width:'8%' },
             {field:'status',     title: '发布状态',    width:'8%' ,templet:'#deployStatus'},
-            {field:'remark', title: '备注', width:'13%'},
+            {field:'remark', title: '备注', width:'10%'},
             {title: '操作',fixed: 'right', align: 'center', toolbar: '#blogBar'}
         ]]
     };

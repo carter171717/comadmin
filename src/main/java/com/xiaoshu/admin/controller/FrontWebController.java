@@ -23,11 +23,12 @@ public class FrontWebController {
     MyBlogService myBlogService;
 
     @GetMapping(value = {"","/index"})
-    public String webIndex(ModelMap modelMap) {
+    public String webIndex(String category,ModelMap modelMap) {
+        log.info("要查询的日志类别是："+category);
         QueryWrapper<MyBlog> ew = new QueryWrapper<>();
         ew.eq("status","1");
         List<MyBlog> list  = myBlogService.list(ew);
-        System.out.println("这里是博客列表页面了,一共" + list.size()+"篇博客");
+        //System.out.println("这里是博客列表页面了,一共" + list.size()+"篇博客");
         modelMap.put("blogList",list);
         return "admin/front/index";
     }

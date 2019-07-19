@@ -39,6 +39,7 @@ layui.use(['form','jquery','layer','laydate'],function(){
         var title = $("input[name='title']").val();
         var summary = $("input[name='summary']").val();
         var createBy = $("input[name='createBy']").val();
+        var category = $("#category").val();
         var remark = $("#remark").val();
         var content = $("#content").summernote("code");
 
@@ -47,6 +48,7 @@ layui.use(['form','jquery','layer','laydate'],function(){
             summary: summary,
             createBy: createBy,
             remark: remark,
+            category:category,
             content: content
         }
         return data;
