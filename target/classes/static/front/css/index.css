@@ -63,8 +63,8 @@
 
 /* 文章顶部栏 */
 .item_article_first {
-    background-color: #34374C !important;
-    border-color: #34374C !important;
+    background-color: #f0ad4e !important;
+    border-color: #f0ad4e !important;
 }
 
 .item_article {
@@ -121,8 +121,19 @@
 
 .btn_save_record {
     width: 100%;
-    background-color: #34374C;
-    border-color: #34374C;
+    background-color: #f0ad4e;
+    border-color: #f0ad4e;
+
+}
+
+.btn_save_record:hover {
+    border-color: #f0ad4e;
+    background: #f47c20!important;
+}
+
+.btn_save_record:visited{
+    border-color: #f0ad4e;
+    background: #f47c20!important;
 }
 
 /* 小功能列表 */

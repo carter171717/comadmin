@@ -83,28 +83,25 @@
                     <hr>
                 </div>
             </div>
-            <input type="text" class="form-control" placeholder="标题:美好的一天...">
-            <br>
-            <textarea class="form-control" rows="3" name=textarea placeholder="内容:今天捡到一分钱！！！^_^"></textarea>
-            <br>
+
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label  class="col-sm-4 control-label">博客类别</label>
+                    <div class="col-sm-8">
+                        <select class="form-control" id="category">
+                            <option th:value="全部">全部</option>
+                            <option th:value="IT技术">IT技术</option>
+                            <option th:value="个人日记">个人日记</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+
             <div class="div_save">
-                <button type="button" class="btn btn-primary btn_save_record">save</button>
+                <button type="button" class="btn btn-primary btn_save_record" id="queryBlog">查询</button>
             </div>
             <hr>
-            <!-- 小功能列表 -->
-            <div class="row div_little_func">
-                <div class="col-xs-4">
-                    <button class="btn btn-default btn-cricle btn_login" data-toggle="modal" data-target="#loginModal">
-                        登
-                    </button>
-                </div>
-                <div class="col-xs-4">
-                    <button class="btn btn-default btn-cricle btn_stay">留</button>
-                </div>
-                <div class="col-xs-4">
-                    <button class="btn btn-default btn-cricle btn_write">写</button>
-                </div>
-            </div>
+
         </div>
     </div>
 </div>
@@ -112,5 +109,24 @@
 
 <script th:src="@{/static/front/js/jquery.min.js}"></script>
 <script th:src="@{/static/bootstrap/js/bootstrap.min.js}"></script>
+<script>
+
+    $(document).ready(function() {
+
+
+
+        $("#queryBlog").click(function(){
+            var category = $("#category").val();
+            $(this).css("background-color", "#f47c20");
+            $(this).css("border-color", "#f47c20");
+            alert(category);
+
+        });
+
+
+    });
+
+
+</script>
 </body>
 </html>
