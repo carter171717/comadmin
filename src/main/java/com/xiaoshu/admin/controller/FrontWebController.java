@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.xiaoshu.admin.entity.MyBlog;
 import com.xiaoshu.admin.service.MyBlogService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,8 +26,14 @@ public class FrontWebController {
     @GetMapping(value = {"","/index"})
     public String webIndex(String category,ModelMap modelMap) {
         log.info("要查询的日志类别是："+category);
+
         QueryWrapper<MyBlog> ew = new QueryWrapper<>();
         ew.eq("status","1");
+        if(StringUtils.isNotBlank(category)){
+            if(!"全部".equals(category)){
+                ew.eq("category",category);
+            }
+        }
         List<MyBlog> list  = myBlogService.list(ew);
         //System.out.println("这里是博客列表页面了,一共" + list.size()+"篇博客");
         modelMap.put("blogList",list);
