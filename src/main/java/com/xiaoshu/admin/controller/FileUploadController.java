@@ -2,6 +2,7 @@ package com.xiaoshu.admin.controller;
 
 import com.xiaoshu.admin.service.UploadService;
 import com.xiaoshu.common.annotation.SysLog;
+import com.xiaoshu.common.util.QiniuUtil;
 import com.xiaoshu.common.util.ResponseEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class FileUploadController {
     @Autowired
     UploadService uploadService;
 
+    @Autowired
+    QiniuUtil qiniuUtil;
+
     @SysLog("上传图片")
     @PostMapping("uploadPic")
     @ResponseBody
@@ -37,6 +41,28 @@ public class FileUploadController {
             url = uploadService.upload(file);
             map.put("url", url);
             map.put("name", file.getOriginalFilename());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.failure(e.getMessage());
+        }
+        return ResponseEntity.success("操作成功").setAny("data",map);
+    }
+
+    @SysLog("上传图片")
+    @PostMapping("/qiniu/images")
+    @ResponseBody
+    public ResponseEntity uploadFileToQiNiu(@RequestParam("file") MultipartFile file, HttpServletRequest httpServletRequest) {
+        if(file == null){
+            return ResponseEntity.failure("上传文件为空 ");
+        }
+        String url = null;
+        Map map = new HashMap();
+        try {
+            url = qiniuUtil.uploadImgToQiNiu(file);
+            url = "http://"+url;
+            map.put("url", url);
+            map.put("name", file.getOriginalFilename());
+            log.info("上传到七牛云的图片路径是：{}",url);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.failure(e.getMessage());

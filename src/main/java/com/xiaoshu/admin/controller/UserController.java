@@ -13,6 +13,7 @@ import com.xiaoshu.common.base.PageData;
 import com.xiaoshu.common.config.MySysUser;
 import com.xiaoshu.common.util.Constants;
 import com.xiaoshu.common.util.Encodes;
+import com.xiaoshu.common.util.QiniuUtil;
 import com.xiaoshu.common.util.ResponseEntity;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -42,6 +43,9 @@ public class UserController {
 
     @Autowired
     UploadService uploadService;
+
+    @Autowired
+    QiniuUtil qiniuUtil;
 
     @GetMapping("list")
     @SysLog("跳转系统用户列表页面")
@@ -165,7 +169,13 @@ public class UserController {
                 }
             }
         }
-        user.setIcon(oldUser.getIcon());
+        String url = user.getIcon();
+        String httpStr = "http://";
+        if(!user.getIcon().contains(httpStr)){
+             url =httpStr + user.getIcon();
+        }
+
+        user.setIcon(url);
         userService.updateUser(user);
 
         if(StringUtils.isBlank(user.getId())){
@@ -261,6 +271,12 @@ public class UserController {
                 }
             }
         }
+        String url = user.getIcon();
+        String httpStr = "http://";
+        if(!user.getIcon().contains(httpStr)){
+            url =httpStr + user.getIcon();
+        }
+        user.setIcon(url);
         userService.updateById(user);
         return ResponseEntity.success("操作成功");
     }
@@ -313,7 +329,8 @@ public class UserController {
         String url = null;
         Map map = new HashMap();
         try {
-            url = uploadService.upload(file);
+            url = qiniuUtil.uploadImgToQiNiu(file);
+           // url = uploadService.upload(file);
             map.put("url", url);
             map.put("name", file.getOriginalFilename());
         } catch (Exception e) {

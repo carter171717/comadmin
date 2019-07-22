@@ -39,6 +39,14 @@ spring:
           max-active: 8
           max-wait: -1
 
+  #七牛云配置
+    qiniu:
+      accessKey: VfZ3d39D8MbnU84IbsqRLRfQhSdvUaT0reqbjJ01
+      secretKey: 1Mj8qJtKpCVwUAEuB7_4fsmbsOKTzm0xjYnub0Hd
+      bucket: comadmin_pic
+      path: pv0shc5j5.bkt.clouddn.com
+      imageMaxSize: 52428800
+      imageMaxNameLength: 200
 
 #mybatisPlu
 mybatis-plus:

@@ -5,7 +5,7 @@
 
     <groupId>com.xiaoshu</groupId>
     <artifactId>comadmin</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>comadmin</name>
@@ -219,6 +219,14 @@
             <artifactId>lettuce-core</artifactId>
             <version>5.1.7.RELEASE</version>
         </dependency>
+
+        <!-- 七牛存储的SDK -->
+        <dependency>
+            <groupId>com.qiniu</groupId>
+            <artifactId>qiniu-java-sdk</artifactId>
+            <version>7.2.2</version>
+        </dependency>
+
 
     </dependencies>
 
