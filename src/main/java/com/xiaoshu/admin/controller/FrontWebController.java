@@ -2,7 +2,9 @@ package com.xiaoshu.admin.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.xiaoshu.admin.entity.MyBlog;
+import com.xiaoshu.admin.service.MailService;
 import com.xiaoshu.admin.service.MyBlogService;
+import com.xiaoshu.common.util.ResponseEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -22,6 +25,18 @@ public class FrontWebController {
 
     @Autowired
     MyBlogService myBlogService;
+
+    @Autowired
+    MailService mailService;
+
+    @GetMapping(value = {"/sendEmailTest"})
+    @ResponseBody
+    public ResponseEntity sendEmail(String category,ModelMap modelMap) {
+
+        mailService.sendMail("814199688@qq.com","测试2","你好，小伙伴！很高兴认识你");
+
+        return ResponseEntity.success("操作成功");
+    }
 
     @GetMapping(value = {"","/index"})
     public String webIndex(String category,ModelMap modelMap) {

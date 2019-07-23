@@ -48,6 +48,13 @@ spring:
       imageMaxSize: 52428800
       imageMaxNameLength: 200
 
+    mail:
+      username: 2962559235@qq.com
+      password: xnwdhcrjjthyddfe
+      host: smtp.qq.com
+      port: 25
+      default-encoding: UTF-8
+
 #mybatisPlu
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*Mapper.xml
@@ -74,7 +81,16 @@ logging:
   config: classpath:logback.xml
   path: D:\logs\comadmin
 
-
+xxl:
+  job:
+    admin:
+      addresses: http://127.0.0.1:8080/xxl-job-admin
+    executor:
+      ip:
+      port: 9999
+      logpath: /data/applogs/xxl-job/jobhandler
+      appname: comadmin-task
+    accessToken:
 
 
 ---
