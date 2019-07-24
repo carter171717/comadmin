@@ -169,13 +169,17 @@ public class UserController {
                 }
             }
         }
-        String url = user.getIcon();
-        String httpStr = "http://";
-        if(!user.getIcon().contains(httpStr)){
-             url =httpStr + user.getIcon();
-        }
 
-        user.setIcon(url);
+        if(StringUtils.isNotBlank(user.getIcon())){
+            String url = user.getIcon();
+            String httpStr = "http://";
+            if(!user.getIcon().contains(httpStr)){
+                url =httpStr + user.getIcon();
+            }
+            user.setIcon(url);
+        }else{
+            user.setIcon(oldUser.getIcon());
+        }
         userService.updateUser(user);
 
         if(StringUtils.isBlank(user.getId())){
