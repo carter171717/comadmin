@@ -48,12 +48,22 @@ spring:
       imageMaxSize: 52428800
       imageMaxNameLength: 200
 
+  #qq邮箱配置
     mail:
       username: 2962559235@qq.com
       password: xnwdhcrjjthyddfe
       host: smtp.qq.com
       port: 25
       default-encoding: UTF-8
+
+    #rabbitmq配置
+    rabbitmq:
+      host: 127.0.0.1
+      port: 5672
+      username: guest
+      password: guest
+
+
 
 #mybatisPlu
 mybatis-plus:

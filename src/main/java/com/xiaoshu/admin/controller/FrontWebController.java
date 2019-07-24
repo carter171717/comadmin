@@ -1,10 +1,12 @@
 package com.xiaoshu.admin.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.xiaoshu.admin.entity.MyBlog;
 import com.xiaoshu.admin.service.MailService;
 import com.xiaoshu.admin.service.MyBlogService;
 import com.xiaoshu.common.util.ResponseEntity;
+import com.xiaoshu.rabbitmq.MsgProducer;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +31,22 @@ public class FrontWebController {
     @Autowired
     MailService mailService;
 
+    @Autowired
+    MsgProducer msgProducer;
+
     @GetMapping(value = {"/sendEmailTest"})
     @ResponseBody
     public ResponseEntity sendEmail(String category,ModelMap modelMap) {
+        MyBlog blog = new MyBlog();
+        blog.setTitle("这是一篇神秘的博客");
+        blog.setRemark("这是备注");
+        String blogStr = JSON.toJSONString(blog);
+        //mailService.sendMail("814199688@qq.com","测试2","你好，小伙伴！很高兴认识你");
 
-        mailService.sendMail("814199688@qq.com","测试2","你好，小伙伴！很高兴认识你");
-
+        for(int i=1 ; i<= 5; i++){
+            msgProducer.sendMsg(blogStr);
+            //msgProducer.sendMsg("帅气而又迷人的阿凌同学，我给你发了第"+i+"个邮件");
+        }
         return ResponseEntity.success("操作成功");
     }
 
