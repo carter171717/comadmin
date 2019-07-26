@@ -10,13 +10,11 @@ import com.xiaoshu.rabbitmq.MsgProducer;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,6 +31,15 @@ public class FrontWebController {
 
     @Autowired
     MsgProducer msgProducer;
+
+    @GetMapping(value = {"/cacheTest"})
+    @ResponseBody
+    @Cacheable(value = "cacheTest#120#90", key = "#category")
+    public ResponseEntity cacheTest(@RequestParam("category") String category, ModelMap modelMap) {
+        System.out.println("执行代码语句");
+        return ResponseEntity.success("操作成功");
+    }
+
 
     @GetMapping(value = {"/sendEmailTest"})
     @ResponseBody
