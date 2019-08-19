@@ -1,4 +1,5 @@
 com\xiaoshu\common\realm\AuthRealm$ShiroUser.class
+com\xiaoshu\common\util\QiniuUtil.class
 com\xiaoshu\common\util\WriterUtil.class
 com\xiaoshu\admin\entity\Group.class
 com\xiaoshu\common\util\GeneralHelper.class
@@ -11,6 +12,7 @@ com\xiaoshu\admin\controller\FrontWebController.class
 com\xiaoshu\admin\entity\CarBill.class
 com\xiaoshu\admin\controller\StatisticsController.class
 com\xiaoshu\admin\controller\RoleController.class
+com\xiaoshu\admin\controller\FileUploadController.class
 com\xiaoshu\common\util\GeneralHelper$FileNameFileFilter.class
 com\xiaoshu\admin\service\StatisticsService.class
 com\xiaoshu\common\util\GeneralHelper$PinYinComparator.class
@@ -57,12 +59,14 @@ com\xiaoshu\common\util\Encodes.class
 com\xiaoshu\common\util\LunarUtil.class
 com\xiaoshu\admin\service\FamilyMemberService.class
 com\xiaoshu\admin\controller\FamilyController.class
+com\xiaoshu\common\util\Md5Utils.class
 com\xiaoshu\admin\service\impl\CarIncomeServiceImpl.class
 com\xiaoshu\generator\CustomGenerator.class
 com\xiaoshu\admin\controller\LonginController$LoginTypeEnum.class
 com\xiaoshu\admin\controller\UserController.class
 com\xiaoshu\admin\controller\LonginController.class
 com\xiaoshu\common\base\PageData.class
+com\xiaoshu\common\util\TestUtil.class
 com\xiaoshu\admin\entity\vo\ShowMenuVo.class
 com\xiaoshu\admin\service\CarIncomeService.class
 com\xiaoshu\admin\service\CreditCardService.class

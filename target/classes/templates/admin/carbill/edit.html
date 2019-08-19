@@ -87,10 +87,8 @@
             <div class="layui-input-block">
                 <select name="payChannel" lay-filter="payChannel" id="payChannel" lay-search="" lay-verify="select" th:value="${localBill.payChannel}">
 
-                    <option th:value="现金">现金</option>
-
                     <option th:value="微信">微信</option>
-
+                    <option th:value="现金">现金</option>
                     <option th:value="支付宝">支付宝</option>
 
                 </select>

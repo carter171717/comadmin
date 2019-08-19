@@ -88,7 +88,8 @@ function sendFile($summernote, file) {
     var formData = new FormData();
     formData.append("file", file);
     $.ajax({
-        url: "/upload/uploadPic",
+       // url: "/upload/uploadPic",  //qiniu/images
+        url: "/upload/qiniu/images",
         data: formData,
         cache: false,
         contentType: false,
@@ -96,9 +97,10 @@ function sendFile($summernote, file) {
         type: 'POST',
         success: function (result) {
             console.log(result.data.name);
-
+            console.log(result.data.url);
             $summernote.summernote('insertImage', result.data.url, function ($image) {
-                    $image.attr('src', result.data.url);
+
+                 $image.attr('src', result.data.url);
             });
 
         }

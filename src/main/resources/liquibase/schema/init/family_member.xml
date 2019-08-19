@@ -57,4 +57,12 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="20190819001" author="wangly">
+        <addColumn tableName="family_member">
+            <column name="is_send" type="VARCHAR(2)" defaultValue="0" remarks="是否已经发送通知 1已经通知 为空或者 0 是没有通知">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>

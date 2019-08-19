@@ -322,6 +322,7 @@ public class LunarUtil {
         System.out.println("农历日期"+lunarDate);
         map.put("nowDate",sdf.format(cal.getTime()));
         map.put("lunarDate",lunarDate);
+        map.put("lunar",lunar+"");
         map.put("month",lunar.get_month()+"月");
         return map;
     }

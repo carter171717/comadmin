@@ -102,6 +102,19 @@ public class FamilyMember extends Model<FamilyMember> {
     @TableField("update_time")
     private LocalDateTime updateTime;
 
+    /**
+     * 是否已经发送邮件通知
+     */
+    @TableField("is_send")
+    private String isSend;
+
+    public String getIsSend() {
+        return isSend;
+    }
+
+    public void setIsSend(String isSend) {
+        this.isSend = isSend;
+    }
 
     public String getId() {
         return id;

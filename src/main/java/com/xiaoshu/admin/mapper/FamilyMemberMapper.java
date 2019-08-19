@@ -23,8 +23,12 @@ public interface FamilyMemberMapper extends BaseMapper<FamilyMember> {
 
     List<Map<String ,Object>> getBirthInCurrentMonth(@Param("userId") String userId,@Param("month") String month);
 
+    List<Map<String ,Object>> getBirthByLunarDate(@Param("userId") String userId,@Param("lunarDate") String lunarDate);
+
     List<Map<String ,Object>> getCountByLunar(@Param("userId") String userId);
 
     List<Map<String ,Object>> getCountByAnimal(@Param("userId") String userId);
+
+    int updateSendRemark(@Param("id") String id);
 
 }

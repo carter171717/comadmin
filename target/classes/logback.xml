@@ -178,10 +178,10 @@
 
     <logger name="org.springframework.web" level="info"/>
     <logger name="org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor" level="INFO"/>
-    <logger name="com.xiaoshu" level="debug"/>
+    <logger name="com.xiaoshu" level="info"/>
 
 
-    <root level="info">
+    <root level="error">
         <appender-ref ref="CONSOLE" />
         <appender-ref ref="DEBUG_FILE" />
         <appender-ref ref="INFO_FILE" />

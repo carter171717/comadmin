@@ -14,6 +14,7 @@
         <result column="birth_day_lunar" property="birthDayLunar" />
         <result column="relation" property="relation" />
         <result column="is_manager" property="isManager" />
+        <result column="is_send" property="isSend" />
         <result column="manager_id" property="managerId" />
         <result column="status" property="status" />
         <result column="remark" property="remark" />
@@ -23,7 +24,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, user_id, user_name, name, sex, animal, birth_day_new, birth_day_lunar, relation, is_manager, manager_id, status, remark, create_time, update_time
+        id, user_id, user_name, name, sex, animal, birth_day_new, birth_day_lunar, relation, is_manager,is_send, manager_id, status, remark, create_time, update_time
     </sql>
 
     <select id="getSexScale" resultType="map" >
@@ -38,6 +39,7 @@
          and birth_day_lunar like '${month}%'
     </select>
 
+
     <select id="getCountByLunar" resultType="map" >
         select count(1) as "num",left(birth_day_lunar,2) as "month" from family_member
         where user_id = #{userId}
@@ -49,5 +51,14 @@
        where user_id = #{userId}
        group by animal
     </select>
+
+    <update id="updateSendRemark">
+
+        update family_member set is_send = '1'
+        where id =  #{id}
+
+    </update>
+
+
 
 </mapper>
