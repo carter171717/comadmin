@@ -45,9 +45,7 @@ public class MailController  extends BaseService {
                 //获取
                 mailService.noticeBirthday(userId, nickName, mail);
             }
-            for (int i = 0; i < 10; i++) {
-                System.out.println("霍华德会加盟湖人吗？" + i);
-            }
+
     }
 
 }
