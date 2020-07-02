@@ -83,13 +83,14 @@ mybatis-plus:
   #原生配置
   configuration:
     #开启驼峰功能
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true
     cache-enabled: false
 
 #日志
 logging:
   config: classpath:logback.xml
-  path: D:\logs\comadmin
+  path: C:\logs\comadmin
 
 xxl:
   job:

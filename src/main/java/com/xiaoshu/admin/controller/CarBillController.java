@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.WebUtils;
 
 import javax.servlet.ServletRequest;
+import java.text.DecimalFormat;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -206,5 +208,46 @@ public class CarBillController extends BaseService {
         carBillService.removeById(id);
         return ResponseEntity.success("操作成功");
     }
+
+    // 获取主页的数据 一次性把报表的数据全部返回
+    @RequestMapping("countBillTotal")
+    @ResponseBody
+    public Map<String,Object> getAllBillData(){
+        Map<String,Object> map = new HashMap<String,Object>();
+        User user = getLoginUserInfo();
+        log.info("当前登录的ID为：{}",user.getId());
+
+        QueryWrapper<CarBill> ew = new QueryWrapper<CarBill>();
+        ew.eq("user_id",user.getId());
+        ew.select("IFNULL(sum(bill_num),0) as total ");
+        map = carBillService.getMap(ew);
+        Double amount = Double.valueOf(String.valueOf(map.get("total")));
+        DecimalFormat df = new DecimalFormat("#.00");
+        System.out.println(df.format(amount));
+        map.put("total",df.format(amount));
+        log.info("账单总金额={}",map.get("total"));
+        return map;
+    }
+
+    @RequestMapping("countOilBillTotal")
+    @ResponseBody
+    public Map<String,Object> countOilBillTotal(){
+        Map<String,Object> map = new HashMap<String,Object>();
+        User user = getLoginUserInfo();
+        log.info("当前登录的ID为：{}",user.getId());
+
+        QueryWrapper<CarBill> ew = new QueryWrapper<CarBill>();
+        ew.eq("user_id",user.getId());
+        ew.eq("bill_type","加油");
+        ew.select("IFNULL(sum(bill_num),0) as total ");
+        map = carBillService.getMap(ew);
+        Double amount = Double.valueOf(String.valueOf(map.get("total")));
+        DecimalFormat df = new DecimalFormat("#.00");
+        System.out.println(df.format(amount));
+        map.put("total",df.format(amount));
+        log.info("加油账单总金额={}",map.get("total"));
+        return map;
+    }
+
 
 }

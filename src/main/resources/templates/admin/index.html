@@ -3,7 +3,7 @@
       xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <meta charset="utf-8">
-    <title>香香Admin</title>
+    <title>小安-Admin</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta http-equiv="Access-Control-Allow-Origin" content="*">
@@ -22,7 +22,7 @@
     <!-- 顶部 -->
     <div class="layui-header header">
         <div class="layui-main">
-            <a href="#" class="logo">香香Admin</a>
+            <a href="#" class="logo">小安Admin</a>
             <!-- 显示/隐藏菜单 -->
             <a href="javascript:" class="iconfont hideMenu icon-menu1"></a>
         <div class="weather" pc>
@@ -58,7 +58,7 @@
             <li class="layui-nav-item" pc>
                 <a href="javascript:">
 
-                    <img th:src="@{/static/admin/img/face.jpg}" class="layui-circle" width="35" height="35">
+                    <img th:src="@{/static/admin/img/17.png}" class="layui-circle" width="35" height="35">
                     <cite><shiro:principal property = "nickName"/></cite>
                     <span class="layui-nav-more"></span>
                 </a>
@@ -80,7 +80,7 @@
 <!-- 左侧导航 -->
 <div class="layui-side layui-bg-black">
     <div class="user-photo">
-        <a class="img" title="我的头像" ><img th:src="@{/static/admin/img/face.jpg}"></a>
+        <a class="img" title="我的头像" ><img th:src="@{/static/admin/img/17.png}"></a>
         <p>你好！<span class="userName"><shiro:principal property = "nickName"/></span></p>
     </div>
     <div class="navBar layui-side-scroll"></div>
@@ -110,7 +110,7 @@
 </div>
 <!-- 底部 -->
 <div class="layui-footer footer">
-    <p>Copyright © 2019香香Admin  Design By 库里小朋友</p>
+    <p>Copyright © 2019 小安Admin  Design By 库里小朋友</p>
 </div>
 </div>
 <!-- 移动导航 -->

@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.WebUtils;
 
 import javax.servlet.ServletRequest;
+import java.text.DecimalFormat;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -181,6 +183,27 @@ public class CarIncomeController extends BaseService {
         }
         carIncomeService.removeById(id);
         return ResponseEntity.success("操作成功");
+    }
+
+
+    // 获取主页的数据 一次性把报表的数据全部返回
+    @RequestMapping("countIncomeTotal")
+    @ResponseBody
+    public Map<String,Object> countIncomeTotal(){
+        Map<String,Object> map = new HashMap<String,Object>();
+        User user = getLoginUserInfo();
+        log.info("当前登录的ID为：{}",user.getId());
+
+        QueryWrapper<CarIncome> ew = new QueryWrapper<CarIncome>();
+        ew.eq("user_id",user.getId());
+        ew.select("IFNULL(sum(fee),0) as total ");
+        map = carIncomeService.getMap(ew);
+        Double amount = Double.valueOf(String.valueOf(map.get("total")));
+        DecimalFormat df = new DecimalFormat("#.00");
+        System.out.println(df.format(amount));
+        map.put("total",df.format(amount));
+        log.info("顺风车总金额={}",map.get("total"));
+        return map;
     }
 
 }

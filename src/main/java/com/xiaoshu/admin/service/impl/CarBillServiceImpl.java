@@ -4,6 +4,7 @@ import com.xiaoshu.admin.entity.CarBill;
 import com.xiaoshu.admin.mapper.CarBillMapper;
 import com.xiaoshu.admin.service.CarBillService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,5 +17,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CarBillServiceImpl extends ServiceImpl<CarBillMapper, CarBill> implements CarBillService {
+
+
+
 
 }

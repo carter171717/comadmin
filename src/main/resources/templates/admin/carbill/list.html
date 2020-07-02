@@ -30,6 +30,14 @@
                 <a class="layui-btn layui-btn-normal" data-type="addCarbill">添加记录</a>
             </div>
             </shiro:hasPermission>
+
+            <div class="layui-inline" style="float:right">
+                <label  class="layui-form-label">消费总额 :</label>
+                <div class="layui-input-block">
+                    <input type="text" class="layui-input" id="billTotal" readonly="readonly" style="background-color:transparent;border:0;color: #F21313;font-size: larger" th:value="12000">
+
+                </div>
+            </div>
             <!--<shiro:hasPermission name="sys:carbill:delete">
             <div class="layui-inline">
                 <a class="layui-btn layui-btn-danger" data-type="deleteSome">批量删除</a>
@@ -54,6 +62,8 @@
 <div id="page"></div>
 <script type="text/javascript" th:src="@{/static/layui/layui.js}"></script>
 <script type="text/javascript" th:src="@{/static/admin/js/tools.js}"></script>
+<script type="text/javascript" th:src="@{/static/jquery/jQuery-2.1.4.min.js}"></script>
 <script type="text/javascript" th:src="@{/static/admin/js/carbill/carbillList.js}"></script>
+x
 </body>
 </html>

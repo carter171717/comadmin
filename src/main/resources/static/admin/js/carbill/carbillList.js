@@ -1,4 +1,4 @@
-layui.use(['layer','form','table'], function() {
+layui.use(['layer','form','table','jquery'], function() {
     var layer = layui.layer,
         $ = layui.jquery,
         form = layui.form,
@@ -146,4 +146,26 @@ layui.use(['layer','form','table'], function() {
         return false;
     });
 
+});
+
+function getData(){
+    $.ajax({
+        url : "/admin/carbill/countBillTotal",
+        type : "POST",
+        dataType : 'json',
+        async : false,
+        data : {
+        },
+        success : function(data) {
+            //alert(data.total);
+            var billTotal = data.total;
+            $("#billTotal").val(billTotal +" 元");
+
+        }
+    });
+}
+
+
+$(document).ready(function(){
+    getData();
 });
