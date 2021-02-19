@@ -15,22 +15,19 @@ layui.use(['layer','form','table'], function() {
             groups: 6, //只显示 1 个连续页码
             first: "首页", //显示首页
             last: "尾页", //显示尾页
-            limits:[3,10, 20, 30]
+            limits:[ 15, 30, 40],
+            limit:15
         },
         width: $(parent.window).width()-223,
         cols: [[
             {type:'checkbox'},
-            {field:'bankName', title: '银行名称', width:'8%'},
+            {field:'bankName', title: '银行名称', width:'10%'},
             {field:'cardNum',     title: '卡号',    width:'12%' },
-            {field:'cardQuota',     title: '额度',    width:'6%' },
-            {field:'billDate', title: '账单日', width:'9%'},
-            {field:'payDate',    title: '还款日',width:'9%'},
-            {field:'currentBill',  title: '本月账单',width:'9%'}, //单元格内容水平居中
-            {field:'uncountBill',  title: '未出账单',width:'9%'},
-            {field:'leftQuota',  title: '剩余额度',width:'9%'},
-            {field:'remark',  title: '备注',width:'12%'},
-            {field:'validity',       title: '有效期',    width:'8%'},
-            {field:'cardOwner',  title: '持卡人',    width:'8%'},
+            {field:'cardQuota',     title: '额度',    width:'10%' },
+            {field:'billDate', title: '账单日', width:'10%'},
+            {field:'payDate',    title: '还款日',width:'10%'},
+            {field:'validity',       title: '有效期',    width:'10%'},
+            {field:'remark',  title: '备注'},
             {title: '操作',fixed: 'right', align: 'center',width:'10%', toolbar: '#cardBar'}
         ]]
     };
@@ -167,4 +164,28 @@ layui.use(['layer','form','table'], function() {
         return false;
     });
 
+
+
+
+});
+
+function getData(){
+    $.ajax({
+        url : "/admin/creditCard/countCreditTotal",
+        type : "POST",
+        dataType : 'json',
+        async : false,
+        data : {
+        },
+        success : function(data) {
+            //alert(data.total);
+            var creditTotal = data.total;
+            $("#creditTotal").val(creditTotal +" 元");
+
+        }
+    });
+}
+
+$(document).ready(function(){
+    getData();
 });

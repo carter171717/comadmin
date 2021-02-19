@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <title>出行预约</title>
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="format-detection" content="telephone=no">
+        <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all" />
+        <link rel="stylesheet" th:href="@{/static/admin/css/login.css}" media="all" />
+        <link rel="stylesheet" th:href="@{/static/admin/css/list.css}" media="all" />
+    </head>
+    <style>
+        .video-player{background-color: transparent;display: block;position: absolute;z-index: 1;top:0;}
+        .video_mask{ width:100%; height:100%; position:absolute; left:0; top:0; z-index:90; }
+        .login{ height:60%;width:80%;padding: 20px;border-radius: 4px;position:absolute;left: 10%;top:40%; margin:-100px 0 0 -10px;z-index:92;}
+        .login h1{ text-align:center; color:#fff; font-size:24px; margin-bottom:20px; }
+        .title{ text-align:center; color:#fff; font-size:44px; margin-top:100px;z-index:99; }
+        .title2{ text-align:center; color:#fff; font-size:34px; margin-top:10px;z-index:99; }
+        .form_code{ position:relative; }
+        .form_code .code{ position:absolute; right:0; top:1px; cursor:pointer; }
+        .login_btn{ width:100%; }
+        .liFont{color:#fff; font-size:34px;}
+        .labelColor{color:#fff;}
+        .layui-laydate-content>.layui-laydate-list {
+            padding-bottom: 0px;
+            overflow: hidden;
+        }
+        .layui-laydate-content>.layui-laydate-list>li{
+            width:50%
+        }
+
+        .merge-box .scrollbox .merge-list {
+            padding-bottom: 5px;
+        }
+
+    </style>
+
+    <body>
+        <div class="video_mask"></div>
+        <h1 class="title"> 仙游-厦门顺风车预约平台</h1>
+        <h1 class="title2"> (乘客端)</h1>
+        <div class="login">
+            <div class="layui-tab">
+                <ul class="layui-tab-title">
+                    <li class="layui-this liFont" style="color: #fff;">立即预约</li>
+                    <li class="liFont" style="color: #fff;">预约订单查询</li>
+                    <li class="liFont" style="color: #fff;">问题反馈</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <div style="">
+                        <form class="layui-form" style="width:50%;margin:20px auto;">
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label labelColor">乘客昵称</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" class="layui-input" name="passengerName" lay-verify="required" placeholder="请输入您的昵称" autocomplete="off" >
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label labelColor">联系电话</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" class="layui-input" name="phone" placeholder="请输入联系电话" autocomplete="off" >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label labelColor">出行人数</label>
+                                    <div class="layui-input-block">
+                                        <!--<input type="text" class="layui-input" name="billDay" placeholder="请输入消费日期">-->
+                                        <input type="number" class="layui-input" name="orderNum" lay-verify="required" placeholder="请输入出行人数" autocomplete="off" >
+                                    </div>
+                                </div>
+
+                                <div class="layui-inline">
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label labelColor">出行路线</label>
+                                        <div class="layui-input-block" style="width: 180px">
+                                            <select  name="route" lay-filter="billType" id="route" lay-search="" lay-verify="select" style="width: 180px">
+                                                <option th:value="1">厦门-仙游</option>
+                                                <option th:value="2">仙游-厦门</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label labelColor">预约日期</label>
+                                    <div class="layui-input-block">
+
+                                        <input type="text" class="layui-input" id="orderDate" name="orderDate" placeholder="请选择预约日期" autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label labelColor">出发时间</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" class="layui-input" id="orderTime" name="orderTime" placeholder="请输入出发时间" autocomplete="off" >
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label labelColor">上车地点</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" class="layui-input" name="startAddress" lay-verify="required" placeholder="请输入上车地点" autocomplete="off" >
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label labelColor">下车地点</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" class="layui-input" name="endAddress" placeholder="请输入下车地点" autocomplete="off" >
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="layui-form-item">
+
+                                    <label class="layui-form-label labelColor">乘车备注</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" class="layui-input" name="remark" style="width: 485px"  placeholder="请输入备注信息..." autocomplete="off" >
+                                    </div>
+
+                            </div>
+
+                            <div class="layui-form-item">
+                                <div style="text-align: center;margin-left: -20px">
+                                   <button type="button" class="layui-btn layui-btn-normal layui-btn-lg" lay-submit="" lay-filter="orderConfirm">确认预约</button>
+                                </div>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                    <div class="layui-tab-item">
+
+                        <div class="layui-field-box">
+                            <form class="layui-form" style="width:60%;margin:20px auto;" id="findOrder">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label labelColor">联系电话</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" class="layui-input" id="s_phone" name="s_phone" placeholder="请输入联系电话" autocomplete="off" >
+                                    </div>
+                                </div>
+
+                                <div class="layui-inline">
+                                    <label class="layui-form-label labelColor">预约日期</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" class="layui-input" id="s_orderDate" name="s_orderDate" placeholder="请选择预约日期" autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <a class="layui-btn" lay-submit="" style="margin-left: 20px" lay-filter="searchForm"><i class="layui-icon">&#xe615;</i>查询预约</a>
+                                </div>
+
+                            </form>
+
+                            <div class="layui-form users_list">
+
+                                <div style="margin-top: 30px;display:none" id="nofind">
+
+                                    <h1 style="font-size:30px "> 没有找到您的订单哦！</h1><br>
+                                    <h1 style="font-size:30px "> 嗯嗯嗯...请检查您的联系电话和预约日期是否填写正确!</h1><br>
+                                    <h1 style="font-size:20px "> 温馨提醒：通过平台预约后才可以找到您的订单消息哦！ </h1>
+
+                                </div>
+
+                                <div style="margin-top: 30px;display:none" id="finding">
+
+                                    <h1 style="font-size:30px "> 您的订单正在疯狂地寻找顺路车主中</h1><br>
+                                    <h1 style="font-size:30px "> 请耐心等待。。。</h1><br>
+                                    <h1 style="font-size:20px "> 温馨提醒：系统会尽快为您匹配顺风车！请稍等哒！么么哒！ </h1>
+
+                                </div>
+
+                                <div style="margin-top: 30px;display: none" id="finded">
+
+                                    <h1 style="font-size:30px "> 恭喜您，您已经被接单啦</h1><br>
+                                    <h1 style="font-size:30px "> 车主 <label id="d_name">霍师傅</label> 联系电话 <label id="d_phone">18259023540</label></h1><br>
+                                    <h1 style="font-size:30px "> 车牌号为 <label id="carNum">闽D017CS</label> </h1>
+                                    <h1 style="font-size:20px "> 温馨提醒：车主会尽快添加您的微信与你联系，您也可以主动与车主联系！么么哒！ </h1>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="layui-tab-item">
+                        问题反馈
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" th:src="@{/static/layui/layui.js}"></script>
+        <script type="text/javascript" th:src="@{/static/jquery/jQuery-2.1.4.min.js}"></script>
+        <script>
+            layui.use(['element','form','jquery','layer','table','laydate'],function(){
+                var form = layui.form,
+                    element = layui.element,
+                    $    = layui.jquery,
+                    layer = layui.layer,
+                    laydate = layui.laydate,
+                    table = layui.table,
+                    t;
+
+
+                form.on("submit(orderConfirm)",function(data){
+                    var loadIndex = layer.load(2, {
+                        shade: [0.3, '#333']
+                    });
+                    //给角色赋值
+                    delete data.field["roles"];
+                    var selectRole = [];
+                    $('input[name="roles"]:checked').each(function(){
+                        selectRole.push({"id":$(this).val()});
+                    });
+                    data.field.roleLists = selectRole;
+
+
+                    $.ajax({
+                        type:"POST",
+                        url:"/letsGo/orderAdd",
+                        dataType:"json",
+                        contentType:"application/json",
+                        data:JSON.stringify(data.field),
+                        success:function(res){
+                            layer.close(loadIndex);
+                            if(res.success){
+                                parent.layer.msg("预约登记成功!请等待司机接单！",{time:3500},function(){
+                                    //刷新父页面
+                                    parent.location.reload();
+                                });
+                            }else{
+                                layer.msg(res.message);
+                            }
+                        }
+                    });
+                    return false;
+                });
+
+                //搜索
+                form.on("submit(searchForm)",function(data){
+
+
+                    var phone = $("#s_phone").val();
+                    var orderDate = $("#s_orderDate").val();
+                    var queryData = {
+                        phone:phone,
+                        orderDate:orderDate
+                    }
+                    $.ajax({
+                        url : "/letsGo/queryOrder",
+                        type : "POST",
+                        contentType:"application/json;charset=UTF-8",
+                        dataType : 'json',
+                        async : false,
+                        data : JSON.stringify(queryData),
+                        success : function(data) {
+                            var status = data.status;
+                            if("99" == status){ //没有找到
+                                $("#nofind").attr("style","display:block;");//隐藏div
+                                $("#finding").attr("style","display:none;");//隐藏div
+                                $("#finded").attr("style","display:none;");//隐藏div
+                            }
+                            if("0" == status){//未接单
+                                $("#nofind").attr("style","display:none;");//隐藏div
+                                $("#finding").attr("style","display:block;");//隐藏div
+                                $("#finded").attr("style","display:none;");//隐藏div
+                            }
+                            if("1" == status){//已经接单
+                                $("#nofind").attr("style","display:none;");//隐藏div
+                                $("#finding").attr("style","display:none;");//隐藏div
+                                $("#finded").attr("style","display:block;");//隐藏div
+                                $("#d_name").text(data.driverName);
+                                $("#d_phone").text(data.driverPhone);
+                                $("#carNum").text(data.carNum);
+                            }
+                        }
+                    });
+
+
+                    return false;
+                });
+
+                form.on('switch(adminUser)', function(data){
+                    $("#adminUser").val(data.elem.checked);
+                });
+
+                form.on('switch(locked)', function(data){
+                    $("#locked").val(data.elem.checked);
+                });
+
+                layui.use('laydate', function(){
+                    var laydate = layui.laydate;
+
+                    //执行一个laydate实例
+
+                });
+                laydate.render({
+                    elem: '#orderDate' //指定元素
+                });
+                laydate.render({
+                    elem: '#s_orderDate' //指定元素
+                });
+                laydate.render({
+                    elem: '#orderTime' //指定元素
+                    ,type: 'time'
+                    ,format: 'HH:mm'
+                    ,btns: ['clear', 'confirm']
+
+                });
+               /* table.render({
+
+                    elem: '#orderTable'
+                    ,height: 315 //固定值
+                    ,url: '/letsGo/orderList'
+                    ,id: 'idTest'
+                })*/
+
+            });
+
+        </script>
+
+    </body>
+</html>

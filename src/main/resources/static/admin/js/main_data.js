@@ -47,7 +47,7 @@ function getData(){
             $("#lunarDate").text(lunarDate);
             init1(listTypeBill);
             init2(incomeBill,onroadBill);
-            init3(listOilBill,listAllBill);
+            //init3(listOilBill,listAllBill);
 
         }
     });
@@ -196,7 +196,7 @@ function init1(data){
 
     Highcharts.chart('container1', {
         chart: {
-            type: 'cylinder',
+            type: 'cylinder',//column cylinder
             options3d: {
                 enabled: true,
                 alpha: 15,
@@ -217,10 +217,20 @@ function init1(data){
                 text: '金额'
             }
         },
+        tooltip: {
+            // head + 每个 point + footer 拼接成完整的 table
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y} 元</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
         plotOptions: {
-            column: {
+            cylinder: {
                 dataLabels: {
                     enabled: true //设置显示对应y的值
+                   // inside: true
                 }
             },
             series: {

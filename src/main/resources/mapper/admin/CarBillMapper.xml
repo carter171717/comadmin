@@ -86,5 +86,32 @@
     </select>
 
 
+    <select id="getBillTotalByYear" resultType="map" >
+
+    select ROUND(sum(bill_num),2) as "total",left(bill_day,4) as "yearName" from car_bill
+    where user_id =  #{userId}
+    group by left(bill_day,4) order by  CAST(yearName as SIGNED)  asc
+
+    </select>
+
+    <select id="getBillDetailByYear" resultType="map" >
+
+    select bill_type as "billType" ,ROUND(sum(bill_num),2) as  "billNum" from car_bill
+    where user_id =  #{userId}
+    and left(bill_day,4) =  #{year}
+    group by bill_type order by "billType" asc
+
+    </select>
+
+
+    <select id="getIncomeByYear" resultType="map" >
+
+    select ROUND(sum(fee),2) as "total",left(ride_day,4) as "yearName" from car_income  where user_id =  #{userId}
+    group by left(ride_day,4)
+    order by  CAST(yearName as SIGNED)  asc
+
+    </select>
+
+
 
 </mapper>

@@ -63,6 +63,11 @@ spring:
       username: guest
       password: guest
 
+    thymeleaf:
+      mode: HTML
+      encoding: utf-8
+      cache: false
+
 
 
 #mybatisPlu

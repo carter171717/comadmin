@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaoshu.admin.mapper.OrderInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xiaoshu.admin.entity.OrderInfo">
+        <id column="id" property="id" />
+        <result column="passenger_name" property="passengerName" />
+        <result column="order_date" property="orderDate" />
+        <result column="order_num" property="orderNum" />
+        <result column="order_time" property="orderTime" />
+        <result column="route" property="route" />
+        <result column="route_name" property="routeName" />
+        <result column="connect_type" property="connectType" />
+        <result column="phone" property="phone" />
+        <result column="start_address" property="startAddress" />
+        <result column="end_address" property="endAddress" />
+        <result column="valuation" property="valuation" />
+        <result column="time_change" property="timeChange" />
+        <result column="remark" property="remark" />
+        <result column="status" property="status" />
+        <result column="driver_id" property="driverId" />
+        <result column="driver_name" property="driverName" />
+        <result column="driver_phone" property="driverPhone" />
+        <result column="car_num" property="carNum" />
+        <result column="take_time" property="takeTime" />
+        <result column="finish_time" property="finishTime" />
+        <result column="cancel_time" property="cancelTime" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, passenger_name, order_date, order_num, order_time, route, route_name, connect_type, phone, start_address, end_address, valuation, time_change, remark, status, driver_id, driver_name, driver_phone, car_num, take_time, finish_time, cancel_time, create_time, update_time
+    </sql>
+
+    <update id="fallBack">
+
+        update order_info set driver_id='',driver_name='',driver_phone='',car_num='',take_time='' where id = #{id}
+
+    </update>
+
+</mapper>

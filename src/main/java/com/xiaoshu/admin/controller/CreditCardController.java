@@ -8,32 +8,28 @@ import com.xiaoshu.admin.base.BaseService;
 import com.xiaoshu.admin.entity.CreditCard;
 import com.xiaoshu.admin.entity.Role;
 import com.xiaoshu.admin.entity.User;
-import com.xiaoshu.admin.mapper.CreditCardMapper;
 import com.xiaoshu.admin.service.CreditCardService;
 import com.xiaoshu.admin.service.RoleService;
 import com.xiaoshu.admin.service.UploadService;
 import com.xiaoshu.admin.service.UserService;
 import com.xiaoshu.common.annotation.SysLog;
 import com.xiaoshu.common.base.PageData;
-import com.xiaoshu.common.realm.AuthRealm;
-import com.xiaoshu.common.util.Constants;
 import com.xiaoshu.common.util.ResponseEntity;
 import com.xiaoshu.common.util.UUIDHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-
-import org.springframework.stereotype.Controller;
 import org.springframework.web.util.WebUtils;
 
 import javax.servlet.ServletRequest;
+import java.text.DecimalFormat;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -68,8 +64,10 @@ public class CreditCardController extends BaseService {
     @PostMapping("list")
     @ResponseBody
     public PageData<CreditCard> list(@RequestParam(value = "page",defaultValue = "1")Integer page,
-                                     @RequestParam(value = "limit",defaultValue = "10")Integer limit,
+                                     @RequestParam(value = "limit",defaultValue = "20")Integer limit,
                                      ServletRequest request){
+
+        log.info("请求信用卡的每页个数："+ limit);
         User user = getLoginUserInfo();
         log.info("当前登录的ID为：{}",user.getLoginName());
 
@@ -182,6 +180,26 @@ public class CreditCardController extends BaseService {
         }
         creditCardService.removeById(id);
         return ResponseEntity.success("操作成功");
+    }
+
+    // 获取主页的数据 一次性把报表的数据全部返回
+    @RequestMapping("countCreditTotal")
+    @ResponseBody
+    public Map<String,Object> countIncomeTotal(){
+        Map<String,Object> map = new HashMap<String,Object>();
+        User user = getLoginUserInfo();
+        log.info("当前登录的ID为：{}",user.getId());
+
+        QueryWrapper<CreditCard> ew = new QueryWrapper<CreditCard>();
+        ew.eq("user_id",user.getId());
+        ew.select("IFNULL(sum(card_quota),0) as total ");
+        map = creditCardService.getMap(ew);
+        Double amount = Double.valueOf(String.valueOf(map.get("total")));
+        DecimalFormat df = new DecimalFormat("#.00");
+        System.out.println(df.format(amount));
+        map.put("total",df.format(amount));
+        log.info("信用卡总额度={}",map.get("total"));
+        return map;
     }
 
 

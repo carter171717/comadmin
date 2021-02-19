@@ -10,4 +10,9 @@
 	<include file="classpath:liquibase/schema/init/car_bill.xml" relativeToChangelogFile="false" />
 	<include file="classpath:liquibase/schema/init/car_income.xml" relativeToChangelogFile="false" />
 	<include file="classpath:liquibase/schema/init/blog.xml" relativeToChangelogFile="false" />
+
+	<include file="classpath:liquibase/schema/init/driver_info.xml" relativeToChangelogFile="false" />
+	<include file="classpath:liquibase/schema/init/driver_route.xml" relativeToChangelogFile="false" />
+	<include file="classpath:liquibase/schema/init/order_info.xml" relativeToChangelogFile="false" />
+	<include file="classpath:liquibase/schema/init/take_order.xml" relativeToChangelogFile="false" />
 </databaseChangeLog>

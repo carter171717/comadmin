@@ -77,28 +77,11 @@
         </div>
     </div>
     <div class="layui-form-item">
-        <div class="layui-inline">
-            <label class="layui-form-label">本月待还</label>
-            <div class="layui-input-block">
-                <input type="text" class="layui-input" name="currentBill" lay-verify="required" placeholder="请输入本月待还金额" th:value="${localcard.currentBill}">
-            </div>
-        </div>
-        <div class="layui-inline">
-            <label class="layui-form-label">未出账单</label>
-            <div class="layui-input-block">
-                <input type="text" class="layui-input" name="uncountBill" placeholder="请输入未出账单金额" th:value="${localcard.uncountBill}">
-            </div>
-        </div>
-
-
-    </div>
-
-    <div class="layui-form-item">
 
         <div class="layui-inline">
-            <label class="layui-form-label">剩余额度</label>
+            <label class="layui-form-label">排序序号</label>
             <div class="layui-input-block">
-                <input type="text" class="layui-input" name="leftQuota" lay-verify="required" placeholder="请输入剩余额度" th:value="${localcard.leftQuota}">
+                <input type="text" class="layui-input" name="sort" placeholder="请输入排序序号" th:value="${localcard.sort}">
             </div>
         </div>
         <div class="layui-inline">
@@ -112,12 +95,7 @@
 
     <div class="layui-form-item">
 
-        <div class="layui-inline">
-            <label class="layui-form-label">排序序号</label>
-            <div class="layui-input-block">
-                <input type="text" class="layui-input" name="sort" placeholder="请输入排序序号" th:value="${localcard.sort}">
-            </div>
-        </div>
+
         <div class="layui-inline">
             <label class="layui-form-label">备注</label>
             <div class="layui-input-block">

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="utf-8">
+    <title>首页--凌云Admin后台管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all" />
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_tnyc012u2rlwstt9.css" media="all" />
+    <link rel="stylesheet" th:href="@{/static/admin/css/main.css}" media="all" />
+    <style>
+        .grid-demo-bg1{
+            background-color: #1E9FFF;
+            height: 260px;
+        }
+        .grid-demo-bg2{
+            height: 400px;
+        }
+
+        .grid-demo-bg3{
+            background-color: #DF5353;
+            height: 45px;
+        }
+        .grid-demo-bg4{
+            background-color:#1E9FFF;
+            height: 45px;
+        }
+    </style>
+</head>
+<body class="main_body">
+<!--<div class="panel_box row"  style="text-align: center;margin-top: 10em;">
+    <h1>欢迎<shiro:principal property = "nickName"/>使用后台管理！</h1>
+</div>-->
+
+<div class="layui-container">
+
+    <div class="layui-row layui-col-space12" style="width: 99%;margin-top: 5em">
+
+
+
+        <div class="layui-col-lg6">
+            <form class="layui-form" style="width:80%;margin-top: 2%;">
+                <div class="layui-form-item">
+                    <div class="layui-row grid-demo layui-col-space1">
+
+                        <div class="layui-col-md9">
+                            <div class="grid-demo">
+                               <!-- <input type="text" value="" name="s_key" placeholder="输入年份" class="layui-input search_input">-->
+                                <!--<input type="text" class="layui-input" id="billDay" name="billDay" placeholder="请选择消费日期" autocomplete="off">-->
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">统计年份</label>
+                                        <div class="layui-input-block">
+                                            <select name="year" lay-filter="year" id="year" lay-search="" lay-verify="select">
+                                                <option th:value="2019">2019年</option>
+                                                <option th:value="2020">2020年</option>
+                                                <option th:value="2021">2021年</option>
+                                                <option th:value="2022">2022年</option>
+                                                <option th:value="2023">2023年</option>
+                                            </select>
+                                        </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-col-md3">
+                            <div class="grid-demo">
+                                <button type="button" class="layui-btn layui-btn-normal" style="width: 100%" id="search" onclick="getPieData();">查询</button>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </form>
+
+            <div class="grid-demo-bg2">
+
+                <div id="container1" style="width:100%;"></div>
+
+            </div>
+
+        </div>
+
+        <div class="layui-col-lg6">
+
+            <div class="grid-demo-bg2">
+
+                <div id="container2" style="width:100%;margin-top: 75px"></div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript" th:src="@{/static/highcharts/highcharts.js}"></script>
+<script type="text/javascript" th:src="@{/static/highcharts/highcharts-3d.js}"></script>
+<script type="text/javascript" th:src="@{/static/highcharts/modules/cylinder.js}"></script>
+<script type="text/javascript" th:src="@{/static/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/static/admin/js/main.js}"></script>
+<script type="text/javascript" th:src="@{/static/jquery/jQuery-2.1.4.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/admin/js/table/carTable.js}"></script>
+</body>
+</html>

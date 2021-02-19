@@ -122,6 +122,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/admin/index","anon");
         filterChainDefinitionMap.put("/admin/login","anon");
         filterChainDefinitionMap.put("/web/**","anon");
+        filterChainDefinitionMap.put("/letsGo/**","anon");
         filterChainDefinitionMap.put("/toLogin","anon");
         filterChainDefinitionMap.put("/getCaptcha","anon");
         filterChainDefinitionMap.put("/anonCtrl/","anon");

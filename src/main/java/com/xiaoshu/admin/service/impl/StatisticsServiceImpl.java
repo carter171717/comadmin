@@ -85,4 +85,31 @@ public class StatisticsServiceImpl implements StatisticsService {
 
         return map;
     }
+
+
+    /**
+     *
+     * 年度用车收入支出报告
+     * @param userId
+     * @return
+     */
+    @Override
+    public Map<String, Object> getYearCarData(String userId) {
+        Map<String, Object> map = new HashMap<>();
+
+        List<Map<String ,Object>> listBillTotal  =carBillMapper.getBillTotalByYear(userId);
+        List<Map<String ,Object>> listIncomeTotal  =carBillMapper.getIncomeByYear(userId);
+        map.put("listBillTotal",listBillTotal);
+        map.put("listIncomeTotal",listIncomeTotal);
+        return map;
+    }
+
+    @Override
+    public List<Map<String ,Object>> getDetailPieData(String userId, String year) {
+
+        List<Map<String ,Object>> list = new ArrayList<>();
+        list  =carBillMapper.getBillDetailByYear(userId,year);
+
+        return list;
+    }
 }

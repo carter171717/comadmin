@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <property name="now" value="now()" dbms="mysql,h2"/>
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+    <property name="now" value="sysdate" dbms="oracle"/>
+
+    <changeSet id="20200921001" author="wangly">
+        <createTable tableName="driver_route" remarks="司机发布路线信息表">
+            <column name="id" type="VARCHAR(32)" remarks="主键">
+                <constraints nullable="false" primaryKey="true" />
+            </column>
+            <column name="user_id" type="VARCHAR(32)" remarks="司机账号ID">
+                <constraints nullable="false" />
+            </column>
+            <column name="user_name" type="VARCHAR(64)" remarks="司机账号名称">
+                <constraints nullable="true" />
+            </column>
+            <column name="driver_id" type="VARCHAR(64)" remarks="司机ID">
+                <constraints nullable="true" />
+            </column>
+            <column name="driver_name" type="VARCHAR(64)" remarks="司机姓名">
+                <constraints nullable="true" />
+            </column>
+            <column name="driver_phone" type="VARCHAR(64)" remarks="司机电话">
+                <constraints nullable="true" />
+            </column>
+            <column name="route" type="VARCHAR(1)" remarks="路线类型">
+                <constraints nullable="true" />
+            </column>
+            <column name="route_name" type="VARCHAR(32)" remarks="路线名称">
+                <constraints nullable="true" />
+            </column>
+            <column name="start_address" type="VARCHAR(64)" remarks="路线起点">
+                <constraints nullable="true" />
+            </column>
+            <column name="end_address" type="VARCHAR(64)" remarks="路线终点">
+                <constraints nullable="true" />
+            </column>
+            <column name="order_date" type="VARCHAR(64)" remarks="出发日期">
+                <constraints nullable="true" />
+            </column>
+            <column name="take_num" type="VARCHAR(2)" remarks="可以携带人数">
+                <constraints nullable="true" />
+            </column>
+            <column name="order_time" type="VARCHAR(30)" remarks="出发时间点">
+                <constraints nullable="true" />
+            </column>
+            <column name="remark" type="VARCHAR(128)" remarks="备注">
+                <constraints nullable="true" />
+            </column>
+            <column name="status" type="VARCHAR(1)" remarks="路线状态：0-已取消 1-正常 2-已完成 9-失效">
+                <constraints nullable="true" />
+            </column>
+            <column name="create_time" type="timestamp" defaultValueDate="${now}" remarks="创建时间">
+                <constraints nullable="true" />
+            </column>
+            <column name="update_time" type="timestamp" defaultValueDate="${now}" remarks="更新时间">
+                <constraints nullable="true" />
+            </column>
+        </createTable>
+    </changeSet>
+
+
+
+</databaseChangeLog>

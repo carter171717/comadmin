@@ -33,4 +33,10 @@ public interface CarBillMapper extends BaseMapper<CarBill> {
 
     List<Map<String ,Object>> getCountOnRodeByMonth(@Param("userId") String userId);
 
+    List<Map<String ,Object>> getBillTotalByYear(@Param("userId") String userId);
+
+    List<Map<String ,Object>> getBillDetailByYear(@Param("userId") String userId,@Param("year") String year);
+
+    List<Map<String ,Object>> getIncomeByYear(@Param("userId") String userId);
+
 }

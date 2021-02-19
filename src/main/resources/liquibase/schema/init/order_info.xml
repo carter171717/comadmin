@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <property name="now" value="now()" dbms="mysql,h2"/>
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+    <property name="now" value="sysdate" dbms="oracle"/>
+
+    <changeSet id="20200921001" author="wangly">
+        <createTable tableName="order_info" remarks="乘客订单信息表">
+            <column name="id" type="VARCHAR(32)" remarks="主键">
+                <constraints nullable="false" primaryKey="true" />
+            </column>
+            <column name="passenger_name" type="VARCHAR(64)" remarks="乘客昵称">
+                <constraints nullable="false" />
+            </column>
+            <column name="order_date" type="VARCHAR(64)" remarks="预约出发日期">
+                <constraints nullable="true" />
+            </column>
+            <column name="order_num" type="VARCHAR(2)" remarks="预约人数">
+                <constraints nullable="true" />
+            </column>
+            <column name="order_time" type="VARCHAR(30)" remarks="出发时间点">
+                <constraints nullable="true" />
+            </column>
+            <column name="route" type="VARCHAR(1)" remarks="路线类型">
+                <constraints nullable="true" />
+            </column>
+            <column name="route_name" type="VARCHAR(32)" remarks="路线名称">
+                <constraints nullable="true" />
+            </column>
+            <column name="connect_type" type="VARCHAR(1)" remarks="期望沟通方式：1-微信 2-电话">
+                <constraints nullable="true" />
+            </column>
+            <column name="phone" type="VARCHAR(11)" remarks="手机号码">
+                <constraints nullable="true" />
+            </column>
+            <column name="start_address" type="VARCHAR(64)" remarks="乘车起点">
+                <constraints nullable="true" />
+            </column>
+            <column name="end_address" type="VARCHAR(64)" remarks="乘车终点">
+                <constraints nullable="true" />
+            </column>
+            <column name="valuation" type="VARCHAR(128)" remarks="乘客评价">
+                <constraints nullable="true" />
+            </column>
+            <column name="time_change" type="VARCHAR(1)" remarks="是否接受其他时间：0-否 1-是">
+                <constraints nullable="true" />
+            </column>
+            <column name="remark" type="VARCHAR(128)" remarks="乘客备注">
+                <constraints nullable="true" />
+            </column>
+            <column name="status" type="VARCHAR(1)" remarks="订单状态：0-初始化 1-已接单 2-已完成 3-已取消">
+                <constraints nullable="true" />
+            </column>
+            <column name="driver_id" type="VARCHAR(64)" remarks="接单司机ID">
+                <constraints nullable="true" />
+            </column>
+            <column name="driver_name" type="VARCHAR(64)" remarks="接单司机名称">
+                <constraints nullable="true" />
+            </column>
+            <column name="driver_phone" type="VARCHAR(64)" remarks="接单司机电话">
+                <constraints nullable="true" />
+            </column>
+            <column name="car_num" type="VARCHAR(20)" remarks="车牌号">
+                <constraints nullable="true" />
+            </column>
+            <column name="take_time" type="VARCHAR(32)" remarks="接单时间">
+                <constraints nullable="true" />
+            </column>
+            <column name="finish_time" type="VARCHAR(32)" remarks="订单完成时间">
+                <constraints nullable="true" />
+            </column>
+            <column name="cancel_time" type="VARCHAR(32)" remarks="订单取消时间">
+                <constraints nullable="true" />
+            </column>
+            <column name="create_time" type="timestamp" defaultValueDate="${now}" remarks="创建时间">
+                <constraints nullable="true" />
+            </column>
+            <column name="update_time" type="timestamp" defaultValueDate="${now}" remarks="更新时间">
+                <constraints nullable="true" />
+            </column>
+        </createTable>
+    </changeSet>
+
+
+
+</databaseChangeLog>
